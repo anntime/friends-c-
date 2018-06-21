@@ -1,0 +1,260 @@
+/// <summary>
+        ///  获取用户关注过的微博列表提示
+        /// </summary>
+        /// <param name="keywordView">关键字视图</param>
+        /// <param name="page">分页</param>
+        /// <returns>微博提示列表</returns>
+        public DataTable GetHintedBrowseList(KeywordView keywordView, MiicPage page)
+        {
+            Contract.Requires<ArgumentNullException>(keywordView != null, "参数keywordView:不能为空");
+            DataTable result = new DataTable();
+            string message = string.Empty;
+            MiicConditionCollections condition = keywordView.visitor(this);
+            MiicRelation relation = new MiicRelation(Config.Attribute.GetSqlTableNameByClassName<MicroBrowseInfo>(),
+              Config.Attribute.GetSqlColumnNameByPropertyName<MicroBrowseInfo, string>(o => o.PublishID),
+              Config.Attribute.GetSqlTableNameByClassName<MicroPublishInfo>(),
+              Config.Attribute.GetSqlColumnNameByPropertyName<MicroPublishInfo, string>(o => o.ID),
+              MiicDBOperatorSetting.Equal,
+              MiicDBRelationSetting.LeftJoin);
+            MiicColumnCollections columns = new MiicColumnCollections();
+            MiicColumn browseIDColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroBrowseInfo>(),
+                                              Config.Attribute.GetSqlColumnNameByPropertyName<MicroBrowseInfo, string>(o => o.ID));
+            columns.Add(browseIDColumn);
+            MiicColumn browserIDColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroBrowseInfo>(),
+                                               Config.Attribute.GetSqlColumnNameByPropertyName<MicroBrowseInfo, string>(o => o.BrowserID));
+            columns.Add(browserIDColumn);
+            MiicColumn browserNameColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroBrowseInfo>(),
+                                              Config.Attribute.GetSqlColumnNameByPropertyName<MicroBrowseInfo, string>(o => o.BrowserName));
+            columns.Add(browserNameColumn);
+            MiicColumn publishIDColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroBrowseInfo>(),
+                                               Config.Attribute.GetSqlColumnNameByPropertyName<MicroBrowseInfo, string>(o => o.PublishID));
+            columns.Add(publishIDColumn);
+            MiicColumn microTitleColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroPublishInfo>(),
+                                               Config.Attribute.GetSqlColumnNameByPropertyName<MicroPublishInfo, string>(o => o.MicroTitle));
+            columns.Add(microTitleColumn);
+            MiicColumn microContentColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroPublishInfo>(),
+                                               Config.Attribute.GetSqlColumnNameByPropertyName<MicroPublishInfo, string>(o => o.MicroContent));
+            columns.Add(microContentColumn);
+            MiicColumn microTypeColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroPublishInfo>(),
+                                               Config.Attribute.GetSqlColumnNameByPropertyName<MicroPublishInfo, string>(o => o.MicroType));
+            columns.Add(microTypeColumn);
+            try
+            {
+                if (page == null)
+                {
+                    DataTable dt = dbService.GetInformations(columns, relation, condition, out message);
+                    DataView dtView = dt.DefaultView;
+                    result = dtView.ToTable(true);
+                }
+                else
+                {
+                    DataTable dtWithPage = dbService.GetInformationsPage(columns, relation, condition, page, out message);
+                    DataView dtWithPageView = dtWithPage.DefaultView;
+                    result = dtWithPageView.ToTable(true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Config.IlogicLogService.Write(new LogicLog()
+                {
+                    AppName = Config.AppName,
+                    ClassName = ClassName,
+                    NamespaceName = NamespaceName,
+                    MethodName = MethodBase.GetCurrentMethod().Name,
+                    Message = ex.Message,
+                    Oper = Config.Oper
+                });
+            }
+            return result;
+        }
+
+
+ /// <summary>
+        /// 搜索某人微博列表
+        /// </summary>
+        /// <param name="keywordView">关键字视图，类型为PersonMicroPublishSearchView为他人；类型为MyMicroPublishSearchView为自己</param>
+        /// <param name="orderView">排序视图</param>
+        /// <param name="page">分页项</param>
+        /// <returns>某人微博列表</returns>
+        public DataTable GetPersonMicroBlogInfos(MicroPublishSearchView keywordView, OrderView orderView, MiicPage page)
+        {
+            Contract.Requires<ArgumentNullException>(keywordView != null, "参数keywordView:不能为空");
+            DataTable result = new DataTable();
+            MiicColumnCollections column = new MiicColumnCollections();
+            List<MiicOrderBy> orders = new List<MiicOrderBy>();
+            string message = string.Empty;
+            MiicConditionCollections condition = keywordView.visitor(this);
+
+            MiicOrderBy order = new MiicOrderBy()
+            {
+                Desc = orderView.Desc
+            };
+
+            switch (orderView.OrderType)
+            {
+                case OrderTypeSetting.PublishTime:
+                    order.PropertyName = Config.Attribute.GetSqlColumnNameByPropertyName<MicroPartakePublishInfo, DateTime?>(o => o.PublishTime);
+                    break;
+                case OrderTypeSetting.Title:
+                    order.PropertyName = Config.Attribute.GetSqlColumnNameByPropertyName<MicroPartakePublishInfo, string>(o => o.MicroTitle);
+                    break;
+                case OrderTypeSetting.Partake:
+                    order.PropertyName = Config.Attribute.GetSqlColumnNameByPropertyName<MicroPartakePublishInfo, int?>(o => o.PartakeNum);
+                    break;
+            }
+
+            orders.Add(order);
+            condition.order = orders;
+
+            MiicFriendRelation accRelation = new MiicFriendRelation(Config.Attribute.GetSqlColumnNameByPropertyName<MicroPartakePublishInfo, string>(o => o.ID),
+              Config.Attribute.GetSqlTableNameByClassName<MicroAccessoryInfo>(),
+              Config.Attribute.GetSqlColumnNameByPropertyName<MicroAccessoryInfo, string>(o => o.PublishID),
+              MiicDBOperatorSetting.Equal,
+              MiicDBRelationSetting.LeftJoin);
+
+            MiicFriendRelation labelRelation = new MiicFriendRelation(Config.Attribute.GetSqlColumnNameByPropertyName<MicroPartakePublishInfo, string>(o => o.ID),
+              Config.Attribute.GetSqlTableNameByClassName<PublishLabelRelation>(),
+              Config.Attribute.GetSqlColumnNameByPropertyName<PublishLabelRelation, string>(o => o.PublishID),
+              MiicDBOperatorSetting.Equal,
+              MiicDBRelationSetting.LeftJoin);
+
+            MiicFriendRelation userRelation = new MiicFriendRelation(Config.Attribute.GetSqlColumnNameByPropertyName<MicroPartakePublishInfo, string>(o => o.CreaterID),
+                Config.Attribute.GetSqlTableNameByClassName<SimpleUserView>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<SimpleUserView, string>(o => o.UserID),
+                MiicDBOperatorSetting.Equal,
+                MiicDBRelationSetting.LeftJoin);
+
+            //点赞表
+            MiicFriendRelation praiseRelation = new MiicFriendRelation(Config.Attribute.GetSqlColumnNameByPropertyName<MicroAttentionerPublishInfo, string>(o => o.ID),
+                Config.Attribute.GetSqlTableNameByClassName<MicroPraiseInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroPraiseInfo, string>(o => o.PublishID),
+                MiicDBOperatorSetting.Equal,
+                MiicDBRelationSetting.LeftJoin);
+            //点踩表
+            MiicFriendRelation treadRelation = new MiicFriendRelation(Config.Attribute.GetSqlColumnNameByPropertyName<MicroAttentionerPublishInfo, string>(o => o.ID),
+                Config.Attribute.GetSqlTableNameByClassName<MicroTreadInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroTreadInfo, string>(o => o.PublishID),
+                MiicDBOperatorSetting.Equal,
+                MiicDBRelationSetting.LeftJoin);
+            //举报表
+            MiicFriendRelation reportRelation = new MiicFriendRelation(Config.Attribute.GetSqlColumnNameByPropertyName<MicroAttentionerPublishInfo, string>(o => o.ID),
+                Config.Attribute.GetSqlTableNameByClassName<MicroReportInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroReportInfo, string>(o => o.PublishID),
+                MiicDBOperatorSetting.Equal,
+                MiicDBRelationSetting.LeftJoin);
+            //收藏表
+            MiicFriendRelation collectRelation = new MiicFriendRelation(Config.Attribute.GetSqlColumnNameByPropertyName<MicroAttentionerPublishInfo, string>(o => o.ID),
+                Config.Attribute.GetSqlTableNameByClassName<MicroCollectInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroCollectInfo, string>(o => o.PublishID),
+                MiicDBOperatorSetting.Equal,
+                MiicDBRelationSetting.LeftJoin);
+
+            List<MiicFriendRelation> relations = new List<MiicFriendRelation>();
+            relations.Add(accRelation);
+            relations.Add(labelRelation);
+            relations.Add(userRelation);
+            relations.Add(praiseRelation);
+            relations.Add(treadRelation);
+            relations.Add(reportRelation);
+            relations.Add(collectRelation);
+
+            MiicRelationCollections relation = new MiicRelationCollections(Config.Attribute.GetSqlTableNameByClassName<MicroPartakePublishInfo>(), relations);
+
+
+            MiicColumn microPartakePublishInfoAllColumns = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroPartakePublishInfo>());
+            column.Add(microPartakePublishInfoAllColumns);
+
+            MiicColumn microAccessoryIDColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroAccessoryInfo>(),
+                string.Empty,
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroAccessoryInfo, string>(o => o.ID),
+                "MicroAccessoryInfoID");
+            column.Add(microAccessoryIDColumn);
+            MiicColumn fileNameColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroAccessoryInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroAccessoryInfo, string>(o => o.FileName));
+            column.Add(fileNameColumn);
+            MiicColumn filePathColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroAccessoryInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroAccessoryInfo, string>(o => o.FilePath));
+            column.Add(filePathColumn);
+            MiicColumn uploadTime = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroAccessoryInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroAccessoryInfo, DateTime?>(o => o.UploadTime));
+            column.Add(uploadTime);
+            MiicColumn fileTypeColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroAccessoryInfo>(),
+               Config.Attribute.GetSqlColumnNameByPropertyName<MicroAccessoryInfo, string>(o => o.FileType));
+            column.Add(fileTypeColumn);
+
+            MiicColumn labelIDColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<PublishLabelRelation>(),
+               Config.Attribute.GetSqlColumnNameByPropertyName<PublishLabelRelation, string>(o => o.LabelID));
+            column.Add(labelIDColumn);
+            MiicColumn labelNameColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<PublishLabelRelation>(),
+              Config.Attribute.GetSqlColumnNameByPropertyName<PublishLabelRelation, string>(o => o.LabelName));
+            column.Add(labelNameColumn);
+
+
+            MiicColumn orgNameColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<SimpleUserView>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<SimpleUserView, string>(o => o.OrgName));
+            column.Add(orgNameColumn);
+            MiicColumn userUrlColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<SimpleUserView>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<SimpleUserView, string>(o => o.UserUrl));
+            column.Add(userUrlColumn);
+            MiicColumn userTypeColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<SimpleUserView>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<SimpleUserView, string>(o => o.UserType));
+            column.Add(userTypeColumn);
+
+            //点赞人员表
+            MiicColumn praiserIDColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroPraiseInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroPraiseInfo, string>(o => o.PraiserID));
+            column.Add(praiserIDColumn);
+            MiicColumn praiserNameColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroPraiseInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroPraiseInfo, string>(o => o.PraiserName));
+            column.Add(praiserNameColumn);
+            //点踩人员表
+            MiicColumn treaderIDColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroTreadInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroTreadInfo, string>(o => o.TreaderID));
+            column.Add(treaderIDColumn);
+            MiicColumn treaderNameColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroTreadInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroTreadInfo, string>(o => o.TreaderName));
+            column.Add(treaderNameColumn);
+            //举报人员表
+            MiicColumn reporterIDColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroReportInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroReportInfo, string>(o => o.ReporterID));
+            column.Add(reporterIDColumn);
+            MiicColumn reporterNameColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroReportInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroReportInfo, string>(o => o.ReporterName));
+            column.Add(reporterNameColumn);
+            //收藏人员表
+            MiicColumn collectorIDColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroCollectInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroCollectInfo, string>(o => o.CollectorID));
+            column.Add(collectorIDColumn);
+            MiicColumn collectorNameColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroCollectInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroCollectInfo, string>(o => o.CollectorName));
+            column.Add(collectorNameColumn);
+            MiicColumn collectorValidColumn = new MiicColumn(Config.Attribute.GetSqlTableNameByClassName<MicroCollectInfo>(),
+                Config.Attribute.GetSqlColumnNameByPropertyName<MicroCollectInfo, string>(o => o.Valid));
+            column.Add(collectorValidColumn);
+            try
+            {
+                if (page == null)
+                {
+                    result = dbService.GetInformations(column, relation, condition, out message);
+                }
+                else
+                {
+                    result = dbService.QueryStoredProcedure<string>("GetMySearchResult", paras, out message);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogicLog log = new LogicLog()
+                {
+                    AppName = Config.AppName,
+                    ClassName = ClassName,
+                    NamespaceName = NamespaceName,
+                    MethodName = MethodBase.GetCurrentMethod().Name,
+                    Message = ex.Message,
+                    Oper = Config.Oper
+                };
+                Config.IlogicLogService.Write(log);
+            }
+            return result;
+        }
+

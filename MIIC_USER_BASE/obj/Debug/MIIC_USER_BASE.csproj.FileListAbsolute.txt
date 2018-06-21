@@ -1,0 +1,11 @@
+D:\MIIC-MyWork\websit\OA\oa_net\MIIC_USER_BASE\bin\Debug\MiicUser.dll
+D:\MIIC-MyWork\websit\OA\oa_net\MIIC_USER_BASE\bin\Debug\MiicUser.pdb
+D:\MIIC-MyWork\websit\OA\oa_net\MIIC_USER_BASE\bin\Debug\Microsoft.AnalysisServices.AdomdClient.dll
+D:\MIIC-MyWork\websit\OA\oa_net\MIIC_USER_BASE\bin\Debug\Microsoft.AnalysisServices.dll
+D:\MIIC-MyWork\websit\OA\oa_net\MIIC_USER_BASE\obj\Debug\MIIC_USER_BASE.csprojAssemblyReference.cache
+D:\MIIC-MyWork\websit\OA\oa_net\MIIC_USER_BASE\obj\Debug\MIIC_USER_BASE.csproj.CoreCompileInputs.cache
+D:\MIIC-MyWork\websit\OA\oa_net\MIIC_USER_BASE\obj\Debug\MIIC_USER_BASE.csproj.CopyComplete
+D:\MIIC-MyWork\websit\OA\oa_net\MIIC_USER_BASE\obj\Debug\MiicUser.dll
+D:\MIIC-MyWork\websit\OA\oa_net\MIIC_USER_BASE\obj\Debug\MiicUser.pdb
+D:\MIIC-MyWork\websit\OA\oa_net\MIIC_USER_BASE\bin\Debug\MiicUser.dll.CodeAnalysisLog.xml
+D:\MIIC-MyWork\websit\OA\oa_net\MIIC_USER_BASE\bin\Debug\MiicUser.dll.lastcodeanalysissucceeded

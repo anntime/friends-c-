@@ -1,0 +1,314 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
+using System.Threading.Tasks;
+using System.Threading;
+using Miic.Friends.Chat;
+using Miic.Base;
+using Newtonsoft.Json;
+/// <summary>
+/// Summary description for ChatHub
+/// </summary>
+public class ChatHub:Hub
+{
+    private static readonly TimeSpan disconnectThreshold = TimeSpan.FromSeconds(10);
+    /// <summary>
+    /// 基础服务
+    /// </summary>
+    private readonly IRepository repository;
+    /// <summary>
+    /// 聊天服务
+    /// </summary>
+    private readonly IChatService service;
+	public ChatHub()
+	{
+		//
+		// TODO: Add constructor logic here
+		//
+	}
+    public ChatHub(IChatService service,IRepository repository) 
+    {
+        this.service = service;
+        this.repository = repository;
+    }
+    /// <summary>
+    ///检查状态
+    /// </summary>
+    private void CheckStatus()
+    {
+        if (OutOfSync)
+        {
+            Clients.Caller.outOfSync();
+        }
+    }
+    private string UserAgent
+    {
+        get
+        {
+            if (Context.Headers != null)
+            {
+                return Context.Headers["User-Agent"];
+            }
+            return null;
+        }
+    }
+    private bool OutOfSync
+    {
+        get
+        {
+            string version = Context.QueryString["version"];
+
+            if (String.IsNullOrEmpty(version))
+            {
+                return true;
+            }
+
+            return new Version(version) != Constants.JabbRVersion;
+        }
+    }
+    public override Task OnConnected()
+    {
+        Console.WriteLine("OnConnected({0})", Context.ConnectionId);
+        CheckStatus();
+        return base.OnConnected();
+    }
+    public override Task OnDisconnected(bool stopCalled)
+    {
+        DisconnectClient(Context.ConnectionId, true);
+        return base.OnDisconnected(stopCalled);
+    }
+    public override Task OnReconnected()
+    {
+        Console.WriteLine("OnReconnected({0})", Context.ConnectionId);
+
+        var userId = Context.User.GetUserId();
+
+        ChatUser user = repository.VerifyUserId(userId);
+
+        if (user == null)
+        {
+            Console.WriteLine("Reconnect failed user {0}:{1} doesn't exist.", userId, Context.ConnectionId);
+            return TaskAsyncHelper.Empty;
+        }
+
+        // Make sure this client is being tracked
+        service.AddClient(user, Context.ConnectionId, UserAgent);
+
+        var currentStatus = (ChatUserStatus)user.Status;
+
+        if (currentStatus == ChatUserStatus.Offline)
+        {
+            Console.WriteLine("{0}:{1} reconnected after temporary network problem and marked offline.", user.UserName, Context.ConnectionId);
+
+            // Mark the user as inactive
+            user.Status = (int)ChatUserStatus.Inactive;
+            repository.CommitChanges();
+
+            // If the user was offline that means they are not in the user list so we need to tell
+            // everyone the user is really in the room
+            var userViewModel = new UserViewModel(user);
+
+            foreach (var room in user.Groups)
+            {
+                var isOwner = user.OwnedRooms.Contains(room);
+
+                // Tell the people in this room that you've joined
+                Clients.Group(room.GroupID).addUser(userViewModel, room.GroupName, isOwner);
+            }
+        }
+        else
+        {
+            Console.WriteLine("{0}:{1} reconnected after temporary network problem.", user.UserName, Context.ConnectionId);
+        }
+
+        CheckStatus();
+
+        return base.OnReconnected();
+    }
+
+    private void DisconnectClient(string clientId, bool useThreshold = false)
+    {
+        string userId = service.DisconnectClient(clientId);
+        if (String.IsNullOrEmpty(userId))
+        {
+            Console.WriteLine("Failed to disconnect {0}. No user found", clientId);
+            return;
+        }
+        if (useThreshold)
+        {
+            Thread.Sleep(disconnectThreshold);
+        }
+
+        // Query for the user to get the updated status
+        ChatUser user = repository.GetUserById(userId);
+
+        // There's no associated user for this client id
+        if (user == null)
+        {
+            Console.WriteLine("Failed to disconnect {0}:{1}. No user found", userId, clientId);
+            return;
+        }
+
+        repository.Reload(user);
+
+        Console.WriteLine("{0}:{1} disconnected", user.UserName, Context.ConnectionId);
+
+        // 如果所有Client都离开了 则被标记离线 
+        if (user.Status == (int)ChatUserStatus.Offline)
+        {
+            Console.WriteLine("Marking {0} offline", user.UserName);
+
+            foreach (var room in user.Rooms)
+            {
+                var userViewModel = new UserViewModel(user);
+
+                Clients.OthersInGroup(room.GroupID).leave(userViewModel, room.GroupName);
+            }
+        }
+    }
+    private void OnUserInitialize(ClientState clientState, ChatUser user, bool reconnecting)
+    {
+        // Update the active room on the client (only if it's still a valid room)
+        if (user.Groups.Any(room => room.GroupName.Equals(clientState.ActiveGroup, StringComparison.OrdinalIgnoreCase)))
+        {
+            // Update the active room on the client (only if it's still a valid room)
+            Clients.Caller.activeRoom = clientState.ActiveGroup;
+        }
+
+        LogOn(user, Context.ConnectionId, reconnecting);
+    }
+    private void AddMentions(ChatMessage message)
+    {
+        var mentionedUsers = new List<ChatUser>();
+        foreach (var userName in MentionExtractor.ExtractMentions(message.Content))
+        {
+            ChatUser mentionedUser = repository.GetUserByName(userName);
+
+            // Don't create a mention if
+            // 1. If the mentioned user doesn't exist.
+            // 2. If you mention yourself
+            // 3. If you're mentioned in a private room that you don't have access to
+            // 4. You've already been mentioned in this message
+            if (mentionedUser == null ||
+                mentionedUser == message.User ||
+                (message.Room.Private && !mentionedUser.AllowedRooms.Contains(message.Room)) ||
+                mentionedUsers.Contains(mentionedUser))
+            {
+                continue;
+            }
+
+            // mark as read if ALL of the following
+            // 1. user is not offline 用户非下线
+            // 2. user is not AFK 用户非离开
+            // 3. user has been active within the last 10 minutes 
+            // 4. user is currently in the room
+            bool markAsRead = mentionedUser.Status != (int)UserStatus.Offline
+                              && !mentionedUser.IsAfk
+                              && (DateTimeOffset.UtcNow - mentionedUser.LastActivity) < TimeSpan.FromMinutes(10)
+                              && repository.IsUserInRoom(_cache, mentionedUser, message.Room);
+
+            service.AddNotification(mentionedUser, message, message.Room, markAsRead);
+
+            mentionedUsers.Add(mentionedUser);
+        }
+
+        if (mentionedUsers.Count > 0)
+        {
+            repository.CommitChanges();
+        }
+
+        foreach (var user in mentionedUsers)
+        {
+            UpdateUnreadMentions(user);
+        }
+    }
+    /// <summary>
+    /// 加入
+    /// </summary>
+    public void Join()
+    {
+        Join(false);
+    }
+
+    public void Join(bool reconnecting)
+    {
+        // 获取Client状态
+        string userId = Context.User.GetUserId();
+
+        // Try to get the user from the client state
+        ChatUser user = repository.GetUserById(userId);
+
+        if (reconnecting)
+        {
+            Console.WriteLine("{0}:{1} connected after dropping connection.", user.UserName, Context.ConnectionId);
+
+            // If the user was marked as offline then mark them inactive
+            if (user.Status == (int)ChatUserStatus.Offline)
+            {
+                user.Status = (int)ChatUserStatus.Inactive;
+                repository.CommitChanges();
+            }
+
+            // Ensure the client is re-added
+            service.AddClient(user, Context.ConnectionId, UserAgent);
+        }
+        else
+        {
+            Console.WriteLine("{0}:{1} connected.", user.UserName, Context.ConnectionId);
+
+            // Update some user values
+            service.UpdateActivity(user, Context.ConnectionId, UserAgent);
+            repository.CommitChanges();
+        }
+
+        ClientState clientState = GetClientState();
+
+        OnUserInitialize(clientState, user, reconnecting);
+    }
+    /// <summary>
+    /// 获取客户状态信息
+    /// </summary>
+    /// <returns></returns>
+    private ClientState GetClientState()
+    {
+        // New client state
+        var state = GetCookieValue("jabbr.state");
+
+        ClientState clientState = null;
+
+        if (String.IsNullOrEmpty(state))
+        {
+            clientState = new ClientState();
+        }
+        else
+        {
+            clientState = JsonConvert.DeserializeObject<ClientState>(state);
+        }
+
+        return clientState;
+    }
+    /// <summary>
+    /// 获取cookie值
+    /// </summary>
+    /// <param name="key">key</param>
+    /// <returns>value</returns>
+    private string GetCookieValue(string key)
+    {
+        Microsoft.AspNet.SignalR.Cookie cookie;
+        Context.RequestCookies.TryGetValue(key, out cookie);
+        string value = cookie != null ? cookie.Value : null;
+        return value != null ? Uri.UnescapeDataString(value) : null;
+    }
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            repository.Dispose();
+        }
+
+        base.Dispose(disposing);
+    }
+}

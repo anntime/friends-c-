@@ -1,0 +1,70 @@
+﻿<section id="sctChat" class="message-block">
+	<h2>在线交流</h2>
+	<div class="message-wrapper">
+		<div class="message-left">
+			<div class="contacts-search">
+				<input id="txtKeyword" class="search" placeholder="查找通讯录好友..." type="text">
+				<span id="spnSearch" class="icon-optSet icon-img icon-search-small"></span>
+			</div>
+			<div id="divChatBar" class="contacts-list clear-fix">
+				<ul>
+					<li id="liOftenUsedAddressBookChat" class="selected">
+						<span><img src="../images/user.png" alt="经常联系人" title="经常联系人"></span>
+						<span id="spnOftenUsedAddressBookChatCount" ></span>
+					</li>
+                    <li id="liMyAddressBookChat">
+						<span><img src="../images/book.png" alt="通讯录" title="通讯录"></span>
+						<span id="spnMyAddressBookChatCount" ></span>
+                    </li>
+					<li id="liMyGroupChat">
+						<span><img src="../images/chat.png" alt="讨论组" title="讨论组"></span>
+						<span id="spnMyGroupChatCount"></span>	
+					</li>
+				</ul>
+			</div>
+            <div class="message-list">
+                <!--经常联系人列表-->
+                <ul id="ulOftenUsedAddressBookChatList"></ul>
+            </div>
+			<div class="message-list">
+                <!-- 获取通讯录列表 -->
+                <ul id="ulMyAddressBookChatList"></ul>
+			</div>
+			<div class="message-list">
+				<!--获取我的讨论组列表-->
+				<ul id="ulMyGroupChatList"></ul>
+			</div>
+            <div class="message-list">
+                <!--获取搜索列表-->
+                <ul id="ulSearchChatList"></ul>
+            </div>
+		</div>
+		<div class="message-right">
+			<div id="divMessageContentList" class="message-show-block">
+				<ul id="ulChatMessageContentList"></ul>
+			</div>
+            <div class="chat-editor message-edit-block">
+                <div class="chat-editor-short" id="txtChatMessage" contenteditable="true" tabindex="-1"></div>
+                <div class="chat-right">
+                    <span class="chat-char-tip">
+                        还能输入&nbsp;
+                        <span class="charType">140</span> &nbsp;字
+                    </span>
+                    <input id="btnSendChatMessage" class="btn-submit" value="发送" type="button" />
+                </div>
+                <div class="editor-bottom">
+                    <div class="editor-options">
+                        <form method="post" action="" enctype="multipart/form-data" id="fmImageSend">
+                            <input type="file" accept=".png,.jpg,.gif" name="file" id="fileImageSend">
+                            <a href="javascript:void(0);" title="图片"><span class="icon-optSet icon-img icon-images"></span></a>
+                        </form>
+                        <a href="javascript:void(0);" title="表情" id="aEmotionSend" class="public_emotion"><span class="icon-optSet icon-img icon-face"></span></a>
+                    </div>
+                </div>
+            
+            </div>
+		</div>
+	</div>
+</section>
+
+

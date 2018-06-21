@@ -1,0 +1,4412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://oa.miic.com.cn/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://oa.miic.com.cn/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://oa.miic.com.cn/">
+      <s:element name="GetOpenIMCredential">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetOpenIMCredentialResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetOpenIMCredentialResult" type="tns:MiicKeyValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MiicKeyValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetIMUserInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIMUserInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIMUserInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIMUserList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userIDs" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimlpeImUserInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserUrl" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSimlpeImUserInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimlpeImUserInfo" nillable="true" type="tns:SimlpeImUserInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetIMUserListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIMUserListResult" type="tns:ArrayOfSimlpeImUserInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LeaderSubmit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="insertList" type="tns:ArrayOfSimpleLeaderInfoView" />
+            <s:element minOccurs="0" maxOccurs="1" name="updateList" type="tns:ArrayOfSimpleLeaderInfoView" />
+            <s:element minOccurs="0" maxOccurs="1" name="removeList" type="tns:ArrayOfLeaderKeyView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSimpleLeaderInfoView">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimpleLeaderInfoView" nillable="true" type="tns:SimpleLeaderInfoView" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimpleLeaderInfoView">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeptID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsChief" type="tns:MiicYesNoSetting" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="MiicYesNoSetting">
+        <s:restriction base="s:string">
+          <s:enumeration value="Unknown" />
+          <s:enumeration value="Yes" />
+          <s:enumeration value="No" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfLeaderKeyView">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LeaderKeyView" nillable="true" type="tns:LeaderKeyView" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LeaderKeyView">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeptID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="LeaderSubmitResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LeaderSubmitResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOpenAppID">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetOpenAppIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOpenAppIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRSAPublicKey">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRSAPublicKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRSAPublicKeyResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetEmailPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="resetUserInfo" type="tns:EmailResetUserInfoView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EmailResetUserInfoView">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ResetUserInfoView">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ResetUserInfoView">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdentifyingCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NewPassword" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MiicBooleanWithMessage">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="result" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ResetEmailPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ResetEmailPasswordResult" type="tns:MiicBooleanWithMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetMobilePassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="resetUserInfo" type="tns:MobileResetUserInfoView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="MobileResetUserInfoView">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ResetUserInfoView">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ResetMobilePasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ResetMobilePasswordResult" type="tns:MiicBooleanWithMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WebLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="loginView" type="tns:WebLoginRequestView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WebLoginRequestView">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:LoginRequestView">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="RsaPassword" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="VerifyCode" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="LoginRequestView" abstract="true" />
+      <s:complexType name="LoginResponseView" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Result" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="tns:MiicValidTypeSetting" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckValid" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsLogin" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="MiicValidTypeSetting">
+        <s:restriction base="s:string">
+          <s:enumeration value="Unknown" />
+          <s:enumeration value="Valid" />
+          <s:enumeration value="InValid" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="WebLoginResponseView">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:LoginResponseView">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="CheckPassword" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="CheckUserCode" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="VerifyType" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="WebLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WebLoginResult" type="tns:WebLoginResponseView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WebDirectLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="loginView" type="tns:WebLoginRequestView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WebDirectLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WebDirectLoginResult" type="tns:WebLoginResponseView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WeixinLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="loginView" type="tns:WeixinLoginRequestView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WeixinLoginRequestView">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:LoginRequestView">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PublicID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UnionID" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="WeixinLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WeixinLoginResult" type="tns:WeixinLoginResponseView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WeixinLoginResponseView">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:LoginResponseView" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="AppLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="loginView" type="tns:AppLoginRequestView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AppLoginRequestView">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:LoginRequestView">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="UserCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="AppLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AppLoginResult" type="tns:AppLoginResponseView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AppLoginResponseView">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:LoginResponseView">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="CheckPassword" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="CheckUserCode" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SetPosition">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="position" type="tns:PositionView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PositionView">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Position" type="tns:PositionTypeSetting" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="PositionTypeSetting">
+        <s:restriction base="s:string">
+          <s:enumeration value="All" />
+          <s:enumeration value="Job" />
+          <s:enumeration value="Dimission" />
+          <s:enumeration value="Retire" />
+          <s:enumeration value="Rehire" />
+          <s:enumeration value="Await" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SetPositionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetPositionResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UserInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Position" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TechCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Md5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WxPublicID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WxUnionID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IsLeader" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IsManager" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeptID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeptName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PortID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PortName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrgID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrgName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartyCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdentityCard" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sex" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Room" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Wechat" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ext" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MobileBind" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreaterID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreaterName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreateTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LoginNum" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="JobDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="JoinDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UpdaterID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UpdaterName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpdateTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Valid" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="SsoLoginStatus" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SortNo" nillable="true" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUserInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserInfoResult" type="tns:UserInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Submit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userInfo" type="tns:UserInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SubmitResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInformation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SimpleDetailUserInfoView">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Position" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WxPublicID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WxUnionID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeptID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeptName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PortID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PortName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrgID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrgName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdentityCard" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sex" type="tns:MiicSexSetting" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Nation" type="tns:MiicNationSetting" />
+          <s:element minOccurs="0" maxOccurs="1" name="Room" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QQ" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Wechat" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MobileBind" type="tns:MiicYesNoSetting" />
+          <s:element minOccurs="1" maxOccurs="1" name="LoginNum" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Valid" type="tns:MiicValidTypeSetting" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="JoinDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="JobDate" nillable="true" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="MiicSexSetting">
+        <s:restriction base="s:string">
+          <s:enumeration value="Male" />
+          <s:enumeration value="Female" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="MiicNationSetting">
+        <s:restriction base="s:string">
+          <s:enumeration value="Han" />
+          <s:enumeration value="Zhuang" />
+          <s:enumeration value="Hui" />
+          <s:enumeration value="Manchu" />
+          <s:enumeration value="Uygur" />
+          <s:enumeration value="Miao" />
+          <s:enumeration value="Yi" />
+          <s:enumeration value="Tujia" />
+          <s:enumeration value="Zang" />
+          <s:enumeration value="Mongolian" />
+          <s:enumeration value="Dong" />
+          <s:enumeration value="Bouyei" />
+          <s:enumeration value="Yao" />
+          <s:enumeration value="Bai" />
+          <s:enumeration value="Korean" />
+          <s:enumeration value="HaNi" />
+          <s:enumeration value="Li" />
+          <s:enumeration value="Kazak" />
+          <s:enumeration value="Dai" />
+          <s:enumeration value="She" />
+          <s:enumeration value="Lisu" />
+          <s:enumeration value="TuXiang" />
+          <s:enumeration value="Gelo" />
+          <s:enumeration value="Lahu" />
+          <s:enumeration value="Wa" />
+          <s:enumeration value="Shui" />
+          <s:enumeration value="Naxi" />
+          <s:enumeration value="Qiang" />
+          <s:enumeration value="Tu" />
+          <s:enumeration value="Mulam" />
+          <s:enumeration value="Xibe" />
+          <s:enumeration value="Kirgiz" />
+          <s:enumeration value="Jingpo" />
+          <s:enumeration value="Daur" />
+          <s:enumeration value="Salar" />
+          <s:enumeration value="BLang" />
+          <s:enumeration value="MaoNan" />
+          <s:enumeration value="Tajik" />
+          <s:enumeration value="Pumi" />
+          <s:enumeration value="Achang" />
+          <s:enumeration value="Nu" />
+          <s:enumeration value="Ewenki" />
+          <s:enumeration value="Jing" />
+          <s:enumeration value="Jino" />
+          <s:enumeration value="Deang" />
+          <s:enumeration value="Baoan" />
+          <s:enumeration value="Russian" />
+          <s:enumeration value="Yugur" />
+          <s:enumeration value="Ozbek" />
+          <s:enumeration value="Moinba" />
+          <s:enumeration value="Oroqen" />
+          <s:enumeration value="Drung" />
+          <s:enumeration value="Hezhe" />
+          <s:enumeration value="Gaoshan" />
+          <s:enumeration value="Lhoba" />
+          <s:enumeration value="Tatar" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetInformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInformationResult" type="tns:SimpleDetailUserInfoView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLoginInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLoginInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLoginInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UniqueUserCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UniqueUserCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UniqueUserCodeResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UniqueEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UniqueEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UniqueEmailResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UniqueMobile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mobile" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UniqueMobileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UniqueMobileResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UniquePublicID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="publicID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UniquePublicIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UniquePublicIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UniqueUnionID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="unionID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UniqueUnionIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UniqueUnionIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckPasswordResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendIdentifyToMobile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mobile" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendIdentifyToMobileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendIdentifyToMobileResult" type="tns:MiicBooleanWithMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendIdentifyToMobileForBind">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mobile" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendIdentifyToMobileForBindResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendIdentifyToMobileForBindResult" type="tns:MiicBooleanWithMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckIdentifyCodeForBind">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mobile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="code" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckIdentifyCodeForBindResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckIdentifyCodeForBindResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendIdentifyToEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="toEmail" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendIdentifyToEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendIdentifyToEmailResult" type="tns:MiicBooleanWithMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IdentifyEmailCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="code" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IdentifyEmailCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IdentifyEmailCodeResult" type="tns:MiicBooleanWithMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendPasswordToEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ids" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendPasswordToEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendPasswordToEmailResult" type="tns:MiicBooleanWithMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModifyPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isEmail" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModifyPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ModifyPasswordResult" type="tns:MiicBooleanWithMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAddressBookUserInfos">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAddressBookUserInfosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAddressBookUserInfosResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchAddressBookUserInfos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="keyword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchAddressBookUserInfosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchAddressBookUserInfosResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllAddressBookList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllAddressBookListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllAddressBookListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ManageSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="keyword" type="tns:SearchKeywordView" />
+            <s:element minOccurs="0" maxOccurs="1" name="page" type="tns:MiicPage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SearchKeywordView">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Keyword" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PortID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeptID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Room" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Position" type="tns:PositionTypeSetting" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MiicPage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="pageStart" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="pageEnd" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ManageSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ManageSearchResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManageSearchCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="keyword" type="tns:SearchKeywordView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManageSearchCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetManageSearchCountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteUserInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ids" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteUserInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteUserInfoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ManageGroupSearch">
+        <s:complexType />
+      </s:element>
+      <s:element name="ManageGroupSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ManageGroupSearchResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGroupAllNoInheritList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="groupID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="groupPID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGroupAllNoInheritListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGroupAllNoInheritListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRoleAllNoInheritList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="roleID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRoleAllNoInheritListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRoleAllNoInheritListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ManageRoleSearch">
+        <s:complexType />
+      </s:element>
+      <s:element name="ManageRoleSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ManageRoleSearchResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ManageRoleInheritGroupSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="roleID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ManageRoleInheritGroupSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ManageRoleInheritGroupSearchResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllGroupMemberList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="groupID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SimpleUserInfoView">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sex" type="tns:MiicSexSetting" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSimpleUserInfoView">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimpleUserInfoView" nillable="true" type="tns:SimpleUserInfoView" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllGroupMemberListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllGroupMemberListResult" type="tns:ArrayOfSimpleUserInfoView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllRoleMemberList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="roleID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllRoleMemberListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllRoleMemberListResult" type="tns:ArrayOfSimpleUserInfoView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllInheritListByPID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="groupID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllInheritListByPIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllInheritListByPIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInheritGroups">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="groupID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GroupInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GroupCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserGroupName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GroupUrl" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MemberCount" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreaterID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreaterName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreateTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UpdaterID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UpdaterName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpdaterTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SortNo" nillable="true" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGroupInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GroupInfo" nillable="true" type="tns:GroupInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetInheritGroupsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInheritGroupsResult" type="tns:ArrayOfGroupInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRoleInheritGroups">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="roleID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRoleInheritGroupsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRoleInheritGroupsResult" type="tns:ArrayOfGroupInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVerifyCode">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetVerifyCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVerifyCodeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfoByUnionID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="unionID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfoByUnionIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserInfoByUnionIDResult" type="tns:SimpleDetailUserInfoView" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetUnsubscribe">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="publicID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetUnsubscribeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetUnsubscribeResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMiddleLevelAddressBookList">
+        <s:complexType />
+      </s:element>
+      <s:complexType name="ArrayOfMiicKeyValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MiicKeyValue" type="tns:MiicKeyValue" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMiddleLevelAddressBookListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMiddleLevelAddressBookListResult" type="tns:ArrayOfMiicKeyValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMiddleLevelLeaderList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMiddleLevelLeaderListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMiddleLevelLeaderListResult" type="tns:ArrayOfMiicKeyValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllTipUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ownerID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllTipUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllTipUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckSsoLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckSsoLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckSsoLoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SsoLoginIn">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SsoLoginInResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SsoLoginInResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SsoLoginOut">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SsoLoginOutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SsoLoginOutResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SynchroUserInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userInfo" type="tns:UserInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SynchroUserInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SynchroUserInfoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MiicKeyValue" type="tns:MiicKeyValue" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="UserInfo" nillable="true" type="tns:UserInfo" />
+      <s:element name="SimpleDetailUserInfoView" nillable="true" type="tns:SimpleDetailUserInfoView" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="MiicBooleanWithMessage" type="tns:MiicBooleanWithMessage" />
+      <s:element name="ArrayOfSimpleUserInfoView" nillable="true" type="tns:ArrayOfSimpleUserInfoView" />
+      <s:element name="ArrayOfGroupInfo" nillable="true" type="tns:ArrayOfGroupInfo" />
+      <s:element name="ArrayOfMiicKeyValue" nillable="true" type="tns:ArrayOfMiicKeyValue" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetOpenIMCredentialSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOpenIMCredential" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenIMCredentialSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOpenIMCredentialResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIMUserInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIMUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetIMUserInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIMUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIMUserListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIMUserList" />
+  </wsdl:message>
+  <wsdl:message name="GetIMUserListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIMUserListResponse" />
+  </wsdl:message>
+  <wsdl:message name="LeaderSubmitSoapIn">
+    <wsdl:part name="parameters" element="tns:LeaderSubmit" />
+  </wsdl:message>
+  <wsdl:message name="LeaderSubmitSoapOut">
+    <wsdl:part name="parameters" element="tns:LeaderSubmitResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenAppIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOpenAppID" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenAppIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOpenAppIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRSAPublicKeySoapIn">
+    <wsdl:part name="parameters" element="tns:GetRSAPublicKey" />
+  </wsdl:message>
+  <wsdl:message name="GetRSAPublicKeySoapOut">
+    <wsdl:part name="parameters" element="tns:GetRSAPublicKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetEmailPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetEmailPassword" />
+  </wsdl:message>
+  <wsdl:message name="ResetEmailPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetEmailPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetMobilePasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetMobilePassword" />
+  </wsdl:message>
+  <wsdl:message name="ResetMobilePasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetMobilePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="WebLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:WebLogin" />
+  </wsdl:message>
+  <wsdl:message name="WebLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:WebLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="WebDirectLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:WebDirectLogin" />
+  </wsdl:message>
+  <wsdl:message name="WebDirectLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:WebDirectLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="WeixinLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:WeixinLogin" />
+  </wsdl:message>
+  <wsdl:message name="WeixinLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:WeixinLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="AppLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:AppLogin" />
+  </wsdl:message>
+  <wsdl:message name="AppLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:AppLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetPositionSoapIn">
+    <wsdl:part name="parameters" element="tns:SetPosition" />
+  </wsdl:message>
+  <wsdl:message name="SetPositionSoapOut">
+    <wsdl:part name="parameters" element="tns:SetPositionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitSoapIn">
+    <wsdl:part name="parameters" element="tns:Submit" />
+  </wsdl:message>
+  <wsdl:message name="SubmitSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInformationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInformation" />
+  </wsdl:message>
+  <wsdl:message name="GetInformationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLoginInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLoginInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="UniqueUserCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:UniqueUserCode" />
+  </wsdl:message>
+  <wsdl:message name="UniqueUserCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:UniqueUserCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="UniqueEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:UniqueEmail" />
+  </wsdl:message>
+  <wsdl:message name="UniqueEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:UniqueEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="UniqueMobileSoapIn">
+    <wsdl:part name="parameters" element="tns:UniqueMobile" />
+  </wsdl:message>
+  <wsdl:message name="UniqueMobileSoapOut">
+    <wsdl:part name="parameters" element="tns:UniqueMobileResponse" />
+  </wsdl:message>
+  <wsdl:message name="UniquePublicIDSoapIn">
+    <wsdl:part name="parameters" element="tns:UniquePublicID" />
+  </wsdl:message>
+  <wsdl:message name="UniquePublicIDSoapOut">
+    <wsdl:part name="parameters" element="tns:UniquePublicIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="UniqueUnionIDSoapIn">
+    <wsdl:part name="parameters" element="tns:UniqueUnionID" />
+  </wsdl:message>
+  <wsdl:message name="UniqueUnionIDSoapOut">
+    <wsdl:part name="parameters" element="tns:UniqueUnionIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckPassword" />
+  </wsdl:message>
+  <wsdl:message name="CheckPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToMobileSoapIn">
+    <wsdl:part name="parameters" element="tns:SendIdentifyToMobile" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToMobileSoapOut">
+    <wsdl:part name="parameters" element="tns:SendIdentifyToMobileResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToMobileForBindSoapIn">
+    <wsdl:part name="parameters" element="tns:SendIdentifyToMobileForBind" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToMobileForBindSoapOut">
+    <wsdl:part name="parameters" element="tns:SendIdentifyToMobileForBindResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckIdentifyCodeForBindSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckIdentifyCodeForBind" />
+  </wsdl:message>
+  <wsdl:message name="CheckIdentifyCodeForBindSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckIdentifyCodeForBindResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:SendIdentifyToEmail" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:SendIdentifyToEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdentifyEmailCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:IdentifyEmailCode" />
+  </wsdl:message>
+  <wsdl:message name="IdentifyEmailCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:IdentifyEmailCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordToEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:SendPasswordToEmail" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordToEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:SendPasswordToEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifyPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ModifyPassword" />
+  </wsdl:message>
+  <wsdl:message name="ModifyPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ModifyPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAddressBookUserInfosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAddressBookUserInfos" />
+  </wsdl:message>
+  <wsdl:message name="GetAddressBookUserInfosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAddressBookUserInfosResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchAddressBookUserInfosSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchAddressBookUserInfos" />
+  </wsdl:message>
+  <wsdl:message name="SearchAddressBookUserInfosSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchAddressBookUserInfosResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAddressBookListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllAddressBookList" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAddressBookListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllAddressBookListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ManageSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:ManageSearch" />
+  </wsdl:message>
+  <wsdl:message name="ManageSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:ManageSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManageSearchCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManageSearchCount" />
+  </wsdl:message>
+  <wsdl:message name="GetManageSearchCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManageSearchCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ManageGroupSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:ManageGroupSearch" />
+  </wsdl:message>
+  <wsdl:message name="ManageGroupSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:ManageGroupSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupAllNoInheritListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGroupAllNoInheritList" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupAllNoInheritListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGroupAllNoInheritListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleAllNoInheritListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRoleAllNoInheritList" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleAllNoInheritListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRoleAllNoInheritListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ManageRoleSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:ManageRoleSearch" />
+  </wsdl:message>
+  <wsdl:message name="ManageRoleSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:ManageRoleSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="ManageRoleInheritGroupSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:ManageRoleInheritGroupSearch" />
+  </wsdl:message>
+  <wsdl:message name="ManageRoleInheritGroupSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:ManageRoleInheritGroupSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllGroupMemberListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllGroupMemberList" />
+  </wsdl:message>
+  <wsdl:message name="GetAllGroupMemberListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllGroupMemberListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRoleMemberListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllRoleMemberList" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRoleMemberListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllRoleMemberListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllInheritListByPIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllInheritListByPID" />
+  </wsdl:message>
+  <wsdl:message name="GetAllInheritListByPIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllInheritListByPIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInheritGroupsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInheritGroups" />
+  </wsdl:message>
+  <wsdl:message name="GetInheritGroupsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInheritGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleInheritGroupsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRoleInheritGroups" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleInheritGroupsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRoleInheritGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVerifyCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVerifyCode" />
+  </wsdl:message>
+  <wsdl:message name="GetVerifyCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVerifyCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUnionIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByUnionID" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUnionIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByUnionIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetUnsubscribeSoapIn">
+    <wsdl:part name="parameters" element="tns:SetUnsubscribe" />
+  </wsdl:message>
+  <wsdl:message name="SetUnsubscribeSoapOut">
+    <wsdl:part name="parameters" element="tns:SetUnsubscribeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMiddleLevelAddressBookListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMiddleLevelAddressBookList" />
+  </wsdl:message>
+  <wsdl:message name="GetMiddleLevelAddressBookListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMiddleLevelAddressBookListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMiddleLevelLeaderListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMiddleLevelLeaderList" />
+  </wsdl:message>
+  <wsdl:message name="GetMiddleLevelLeaderListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMiddleLevelLeaderListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllTipUserSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllTipUser" />
+  </wsdl:message>
+  <wsdl:message name="GetAllTipUserSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllTipUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckSsoLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckSsoLogin" />
+  </wsdl:message>
+  <wsdl:message name="CheckSsoLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckSsoLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="SsoLoginInSoapIn">
+    <wsdl:part name="parameters" element="tns:SsoLoginIn" />
+  </wsdl:message>
+  <wsdl:message name="SsoLoginInSoapOut">
+    <wsdl:part name="parameters" element="tns:SsoLoginInResponse" />
+  </wsdl:message>
+  <wsdl:message name="SsoLoginOutSoapIn">
+    <wsdl:part name="parameters" element="tns:SsoLoginOut" />
+  </wsdl:message>
+  <wsdl:message name="SsoLoginOutSoapOut">
+    <wsdl:part name="parameters" element="tns:SsoLoginOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="SynchroUserInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:SynchroUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="SynchroUserInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:SynchroUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenIMCredentialHttpGetIn" />
+  <wsdl:message name="GetOpenIMCredentialHttpGetOut">
+    <wsdl:part name="Body" element="tns:MiicKeyValue" />
+  </wsdl:message>
+  <wsdl:message name="GetIMUserInfoHttpGetIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIMUserInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenAppIDHttpGetIn" />
+  <wsdl:message name="GetOpenAppIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRSAPublicKeyHttpGetIn" />
+  <wsdl:message name="GetRSAPublicKeyHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoHttpGetIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetInformationHttpGetIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInformationHttpGetOut">
+    <wsdl:part name="Body" element="tns:SimpleDetailUserInfoView" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginInfoHttpGetIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UniqueUserCodeHttpGetIn">
+    <wsdl:part name="userCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UniqueUserCodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UniqueEmailHttpGetIn">
+    <wsdl:part name="email" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UniqueEmailHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UniqueMobileHttpGetIn">
+    <wsdl:part name="mobile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UniqueMobileHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UniquePublicIDHttpGetIn">
+    <wsdl:part name="publicID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UniquePublicIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UniqueUnionIDHttpGetIn">
+    <wsdl:part name="unionID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UniqueUnionIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CheckPasswordHttpGetIn">
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckPasswordHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToMobileHttpGetIn">
+    <wsdl:part name="mobile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToMobileHttpGetOut">
+    <wsdl:part name="Body" element="tns:MiicBooleanWithMessage" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToMobileForBindHttpGetIn">
+    <wsdl:part name="mobile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToMobileForBindHttpGetOut">
+    <wsdl:part name="Body" element="tns:MiicBooleanWithMessage" />
+  </wsdl:message>
+  <wsdl:message name="CheckIdentifyCodeForBindHttpGetIn">
+    <wsdl:part name="mobile" type="s:string" />
+    <wsdl:part name="code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckIdentifyCodeForBindHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToEmailHttpGetIn">
+    <wsdl:part name="toEmail" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToEmailHttpGetOut">
+    <wsdl:part name="Body" element="tns:MiicBooleanWithMessage" />
+  </wsdl:message>
+  <wsdl:message name="IdentifyEmailCodeHttpGetIn">
+    <wsdl:part name="email" type="s:string" />
+    <wsdl:part name="code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IdentifyEmailCodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:MiicBooleanWithMessage" />
+  </wsdl:message>
+  <wsdl:message name="ModifyPasswordHttpGetIn">
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="isEmail" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ModifyPasswordHttpGetOut">
+    <wsdl:part name="Body" element="tns:MiicBooleanWithMessage" />
+  </wsdl:message>
+  <wsdl:message name="GetAddressBookUserInfosHttpGetIn" />
+  <wsdl:message name="GetAddressBookUserInfosHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchAddressBookUserInfosHttpGetIn">
+    <wsdl:part name="keyword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchAddressBookUserInfosHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAddressBookListHttpGetIn" />
+  <wsdl:message name="GetAllAddressBookListHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ManageGroupSearchHttpGetIn" />
+  <wsdl:message name="ManageGroupSearchHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupAllNoInheritListHttpGetIn">
+    <wsdl:part name="groupID" type="s:string" />
+    <wsdl:part name="groupPID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupAllNoInheritListHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleAllNoInheritListHttpGetIn">
+    <wsdl:part name="roleID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleAllNoInheritListHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ManageRoleSearchHttpGetIn" />
+  <wsdl:message name="ManageRoleSearchHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ManageRoleInheritGroupSearchHttpGetIn">
+    <wsdl:part name="roleID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ManageRoleInheritGroupSearchHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllGroupMemberListHttpGetIn">
+    <wsdl:part name="groupID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllGroupMemberListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSimpleUserInfoView" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRoleMemberListHttpGetIn">
+    <wsdl:part name="roleID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRoleMemberListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSimpleUserInfoView" />
+  </wsdl:message>
+  <wsdl:message name="GetAllInheritListByPIDHttpGetIn">
+    <wsdl:part name="groupID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllInheritListByPIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInheritGroupsHttpGetIn">
+    <wsdl:part name="groupID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInheritGroupsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfGroupInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleInheritGroupsHttpGetIn">
+    <wsdl:part name="roleID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleInheritGroupsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfGroupInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetVerifyCodeHttpGetIn" />
+  <wsdl:message name="GetVerifyCodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUnionIDHttpGetIn">
+    <wsdl:part name="unionID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUnionIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:SimpleDetailUserInfoView" />
+  </wsdl:message>
+  <wsdl:message name="SetUnsubscribeHttpGetIn">
+    <wsdl:part name="publicID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetUnsubscribeHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetMiddleLevelAddressBookListHttpGetIn" />
+  <wsdl:message name="GetMiddleLevelAddressBookListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMiicKeyValue" />
+  </wsdl:message>
+  <wsdl:message name="GetMiddleLevelLeaderListHttpGetIn" />
+  <wsdl:message name="GetMiddleLevelLeaderListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMiicKeyValue" />
+  </wsdl:message>
+  <wsdl:message name="GetAllTipUserHttpGetIn">
+    <wsdl:part name="ownerID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllTipUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckSsoLoginHttpGetIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckSsoLoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SsoLoginInHttpGetIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SsoLoginInHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SsoLoginOutHttpGetIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SsoLoginOutHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenIMCredentialHttpPostIn" />
+  <wsdl:message name="GetOpenIMCredentialHttpPostOut">
+    <wsdl:part name="Body" element="tns:MiicKeyValue" />
+  </wsdl:message>
+  <wsdl:message name="GetIMUserInfoHttpPostIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIMUserInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenAppIDHttpPostIn" />
+  <wsdl:message name="GetOpenAppIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRSAPublicKeyHttpPostIn" />
+  <wsdl:message name="GetRSAPublicKeyHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoHttpPostIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetInformationHttpPostIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInformationHttpPostOut">
+    <wsdl:part name="Body" element="tns:SimpleDetailUserInfoView" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginInfoHttpPostIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UniqueUserCodeHttpPostIn">
+    <wsdl:part name="userCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UniqueUserCodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UniqueEmailHttpPostIn">
+    <wsdl:part name="email" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UniqueEmailHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UniqueMobileHttpPostIn">
+    <wsdl:part name="mobile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UniqueMobileHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UniquePublicIDHttpPostIn">
+    <wsdl:part name="publicID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UniquePublicIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UniqueUnionIDHttpPostIn">
+    <wsdl:part name="unionID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UniqueUnionIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CheckPasswordHttpPostIn">
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckPasswordHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToMobileHttpPostIn">
+    <wsdl:part name="mobile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToMobileHttpPostOut">
+    <wsdl:part name="Body" element="tns:MiicBooleanWithMessage" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToMobileForBindHttpPostIn">
+    <wsdl:part name="mobile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToMobileForBindHttpPostOut">
+    <wsdl:part name="Body" element="tns:MiicBooleanWithMessage" />
+  </wsdl:message>
+  <wsdl:message name="CheckIdentifyCodeForBindHttpPostIn">
+    <wsdl:part name="mobile" type="s:string" />
+    <wsdl:part name="code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckIdentifyCodeForBindHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToEmailHttpPostIn">
+    <wsdl:part name="toEmail" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendIdentifyToEmailHttpPostOut">
+    <wsdl:part name="Body" element="tns:MiicBooleanWithMessage" />
+  </wsdl:message>
+  <wsdl:message name="IdentifyEmailCodeHttpPostIn">
+    <wsdl:part name="email" type="s:string" />
+    <wsdl:part name="code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IdentifyEmailCodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:MiicBooleanWithMessage" />
+  </wsdl:message>
+  <wsdl:message name="ModifyPasswordHttpPostIn">
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="isEmail" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ModifyPasswordHttpPostOut">
+    <wsdl:part name="Body" element="tns:MiicBooleanWithMessage" />
+  </wsdl:message>
+  <wsdl:message name="GetAddressBookUserInfosHttpPostIn" />
+  <wsdl:message name="GetAddressBookUserInfosHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchAddressBookUserInfosHttpPostIn">
+    <wsdl:part name="keyword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchAddressBookUserInfosHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAddressBookListHttpPostIn" />
+  <wsdl:message name="GetAllAddressBookListHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ManageGroupSearchHttpPostIn" />
+  <wsdl:message name="ManageGroupSearchHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupAllNoInheritListHttpPostIn">
+    <wsdl:part name="groupID" type="s:string" />
+    <wsdl:part name="groupPID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupAllNoInheritListHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleAllNoInheritListHttpPostIn">
+    <wsdl:part name="roleID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleAllNoInheritListHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ManageRoleSearchHttpPostIn" />
+  <wsdl:message name="ManageRoleSearchHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ManageRoleInheritGroupSearchHttpPostIn">
+    <wsdl:part name="roleID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ManageRoleInheritGroupSearchHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllGroupMemberListHttpPostIn">
+    <wsdl:part name="groupID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllGroupMemberListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSimpleUserInfoView" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRoleMemberListHttpPostIn">
+    <wsdl:part name="roleID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRoleMemberListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSimpleUserInfoView" />
+  </wsdl:message>
+  <wsdl:message name="GetAllInheritListByPIDHttpPostIn">
+    <wsdl:part name="groupID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllInheritListByPIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInheritGroupsHttpPostIn">
+    <wsdl:part name="groupID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInheritGroupsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfGroupInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleInheritGroupsHttpPostIn">
+    <wsdl:part name="roleID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRoleInheritGroupsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfGroupInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetVerifyCodeHttpPostIn" />
+  <wsdl:message name="GetVerifyCodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUnionIDHttpPostIn">
+    <wsdl:part name="unionID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByUnionIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:SimpleDetailUserInfoView" />
+  </wsdl:message>
+  <wsdl:message name="SetUnsubscribeHttpPostIn">
+    <wsdl:part name="publicID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetUnsubscribeHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetMiddleLevelAddressBookListHttpPostIn" />
+  <wsdl:message name="GetMiddleLevelAddressBookListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMiicKeyValue" />
+  </wsdl:message>
+  <wsdl:message name="GetMiddleLevelLeaderListHttpPostIn" />
+  <wsdl:message name="GetMiddleLevelLeaderListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMiicKeyValue" />
+  </wsdl:message>
+  <wsdl:message name="GetAllTipUserHttpPostIn">
+    <wsdl:part name="ownerID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllTipUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckSsoLoginHttpPostIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckSsoLoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SsoLoginInHttpPostIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SsoLoginInHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SsoLoginOutHttpPostIn">
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SsoLoginOutHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="UserServiceSoap">
+    <wsdl:operation name="GetOpenIMCredential">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取IM登录凭证</wsdl:documentation>
+      <wsdl:input message="tns:GetOpenIMCredentialSoapIn" />
+      <wsdl:output message="tns:GetOpenIMCredentialSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIMUserInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取百川用户信息</wsdl:documentation>
+      <wsdl:input message="tns:GetIMUserInfoSoapIn" />
+      <wsdl:output message="tns:GetIMUserInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIMUserList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据IM ID集合获取用户基本信息集合</wsdl:documentation>
+      <wsdl:input message="tns:GetIMUserListSoapIn" />
+      <wsdl:output message="tns:GetIMUserListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LeaderSubmit">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">提交中层信息</wsdl:documentation>
+      <wsdl:input message="tns:LeaderSubmitSoapIn" />
+      <wsdl:output message="tns:LeaderSubmitSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenAppID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取OpenID</wsdl:documentation>
+      <wsdl:input message="tns:GetOpenAppIDSoapIn" />
+      <wsdl:output message="tns:GetOpenAppIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicKey">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取RSA公钥</wsdl:documentation>
+      <wsdl:input name="GetRSAPublicKey" message="tns:GetRSAPublicKeySoapIn" />
+      <wsdl:output name="GetRSAPublicKey" message="tns:GetRSAPublicKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">重置密码（Email）</wsdl:documentation>
+      <wsdl:input name="ResetEmailPassword" message="tns:ResetEmailPasswordSoapIn" />
+      <wsdl:output name="ResetEmailPassword" message="tns:ResetEmailPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">重置密码（手机）</wsdl:documentation>
+      <wsdl:input name="ResetMobilePassword" message="tns:ResetMobilePasswordSoapIn" />
+      <wsdl:output name="ResetMobilePassword" message="tns:ResetMobilePasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登录</wsdl:documentation>
+      <wsdl:input name="WebLogin" message="tns:WebLoginSoapIn" />
+      <wsdl:output name="WebLogin" message="tns:WebLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DirectLogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登录</wsdl:documentation>
+      <wsdl:input name="WebDirectLogin" message="tns:WebDirectLoginSoapIn" />
+      <wsdl:output name="WebDirectLogin" message="tns:WebDirectLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登录</wsdl:documentation>
+      <wsdl:input name="WeixinLogin" message="tns:WeixinLoginSoapIn" />
+      <wsdl:output name="WeixinLogin" message="tns:WeixinLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">App登录</wsdl:documentation>
+      <wsdl:input name="AppLogin" message="tns:AppLoginSoapIn" />
+      <wsdl:output name="AppLogin" message="tns:AppLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPosition">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">设置有效性</wsdl:documentation>
+      <wsdl:input message="tns:SetPositionSoapIn" />
+      <wsdl:output message="tns:SetPositionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取用户基本信息(管理专用)</wsdl:documentation>
+      <wsdl:input message="tns:GetUserInfoSoapIn" />
+      <wsdl:output message="tns:GetUserInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">提交用户基本信息(管理专用)</wsdl:documentation>
+      <wsdl:input message="tns:SubmitSoapIn" />
+      <wsdl:output message="tns:SubmitSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取用户信息</wsdl:documentation>
+      <wsdl:input message="tns:GetInformationSoapIn" />
+      <wsdl:output message="tns:GetInformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取登录信息</wsdl:documentation>
+      <wsdl:input message="tns:GetLoginInfoSoapIn" />
+      <wsdl:output message="tns:GetLoginInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUserCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">用户名唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniqueUserCodeSoapIn" />
+      <wsdl:output message="tns:UniqueUserCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniqueEmail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">邮箱唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniqueEmailSoapIn" />
+      <wsdl:output message="tns:UniqueEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniqueMobile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">手机唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniqueMobileSoapIn" />
+      <wsdl:output message="tns:UniqueMobileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniquePublicID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">微信OpenID唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniquePublicIDSoapIn" />
+      <wsdl:output message="tns:UniquePublicIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUnionID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">微信UnionID唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniqueUnionIDSoapIn" />
+      <wsdl:output message="tns:UniqueUnionIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">验证密码</wsdl:documentation>
+      <wsdl:input message="tns:CheckPasswordSoapIn" />
+      <wsdl:output message="tns:CheckPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">将验证码发到手机</wsdl:documentation>
+      <wsdl:input message="tns:SendIdentifyToMobileSoapIn" />
+      <wsdl:output message="tns:SendIdentifyToMobileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobileForBind">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">将验证码发到手机（手机绑定）</wsdl:documentation>
+      <wsdl:input message="tns:SendIdentifyToMobileForBindSoapIn" />
+      <wsdl:output message="tns:SendIdentifyToMobileForBindSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckIdentifyCodeForBind">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">验证手机验证码（手机绑定）</wsdl:documentation>
+      <wsdl:input message="tns:CheckIdentifyCodeForBindSoapIn" />
+      <wsdl:output message="tns:CheckIdentifyCodeForBindSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToEmail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">将验证码发到邮箱</wsdl:documentation>
+      <wsdl:input message="tns:SendIdentifyToEmailSoapIn" />
+      <wsdl:output message="tns:SendIdentifyToEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IdentifyEmailCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">验证邮箱验证码</wsdl:documentation>
+      <wsdl:input message="tns:IdentifyEmailCodeSoapIn" />
+      <wsdl:output message="tns:IdentifyEmailCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordToEmail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">将验证码发到邮箱</wsdl:documentation>
+      <wsdl:input message="tns:SendPasswordToEmailSoapIn" />
+      <wsdl:output message="tns:SendPasswordToEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">修改密码</wsdl:documentation>
+      <wsdl:input message="tns:ModifyPasswordSoapIn" />
+      <wsdl:output message="tns:ModifyPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressBookUserInfos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取通讯录列表(首页)</wsdl:documentation>
+      <wsdl:input message="tns:GetAddressBookUserInfosSoapIn" />
+      <wsdl:output message="tns:GetAddressBookUserInfosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchAddressBookUserInfos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索通讯录列表(首页)</wsdl:documentation>
+      <wsdl:input message="tns:SearchAddressBookUserInfosSoapIn" />
+      <wsdl:output message="tns:SearchAddressBookUserInfosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAddressBookList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取通讯录列表</wsdl:documentation>
+      <wsdl:input message="tns:GetAllAddressBookListSoapIn" />
+      <wsdl:output message="tns:GetAllAddressBookListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ManageSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索用户信息（用户管理）</wsdl:documentation>
+      <wsdl:input message="tns:ManageSearchSoapIn" />
+      <wsdl:output message="tns:ManageSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManageSearchCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取用户数(用户管理)</wsdl:documentation>
+      <wsdl:input message="tns:GetManageSearchCountSoapIn" />
+      <wsdl:output message="tns:GetManageSearchCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">批量删除用户</wsdl:documentation>
+      <wsdl:input message="tns:DeleteUserInfoSoapIn" />
+      <wsdl:output message="tns:DeleteUserInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ManageGroupSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:ManageGroupSearchSoapIn" />
+      <wsdl:output message="tns:ManageGroupSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupAllNoInheritList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索所有不可被继承的用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetGroupAllNoInheritListSoapIn" />
+      <wsdl:output message="tns:GetGroupAllNoInheritListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleAllNoInheritList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索所有不可被继承的用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetRoleAllNoInheritListSoapIn" />
+      <wsdl:output message="tns:GetRoleAllNoInheritListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索角色组信息（角色组管理）</wsdl:documentation>
+      <wsdl:input message="tns:ManageRoleSearchSoapIn" />
+      <wsdl:output message="tns:ManageRoleSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleInheritGroupSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索角色组继承的用户组信息（角色组管理）</wsdl:documentation>
+      <wsdl:input message="tns:ManageRoleInheritGroupSearchSoapIn" />
+      <wsdl:output message="tns:ManageRoleInheritGroupSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllGroupMemberList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索用户组成员信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetAllGroupMemberListSoapIn" />
+      <wsdl:output message="tns:GetAllGroupMemberListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoleMemberList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索角色组成员信息（角色组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetAllRoleMemberListSoapIn" />
+      <wsdl:output message="tns:GetAllRoleMemberListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllInheritListByPID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索用户组成员信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetAllInheritListByPIDSoapIn" />
+      <wsdl:output message="tns:GetAllInheritListByPIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInheritGroups">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索用户组继承用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetInheritGroupsSoapIn" />
+      <wsdl:output message="tns:GetInheritGroupsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleInheritGroups">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索角色组继承用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetRoleInheritGroupsSoapIn" />
+      <wsdl:output message="tns:GetRoleInheritGroupsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVerifyCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取验证码</wsdl:documentation>
+      <wsdl:input message="tns:GetVerifyCodeSoapIn" />
+      <wsdl:output message="tns:GetVerifyCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUnionID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据UnionID获取用户信息</wsdl:documentation>
+      <wsdl:input message="tns:GetUserInfoByUnionIDSoapIn" />
+      <wsdl:output message="tns:GetUserInfoByUnionIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUnsubscribe">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">取消微信关注及绑定</wsdl:documentation>
+      <wsdl:input message="tns:SetUnsubscribeSoapIn" />
+      <wsdl:output message="tns:SetUnsubscribeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelAddressBookList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取中心中层以上干部联系方式</wsdl:documentation>
+      <wsdl:input message="tns:GetMiddleLevelAddressBookListSoapIn" />
+      <wsdl:output message="tns:GetMiddleLevelAddressBookListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelLeaderList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取中心中层干部</wsdl:documentation>
+      <wsdl:input message="tns:GetMiddleLevelLeaderListSoapIn" />
+      <wsdl:output message="tns:GetMiddleLevelLeaderListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTipUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取某人的提醒人员</wsdl:documentation>
+      <wsdl:input message="tns:GetAllTipUserSoapIn" />
+      <wsdl:output message="tns:GetAllTipUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSsoLogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">检测登陆状态，如果已登录则不需要再登录</wsdl:documentation>
+      <wsdl:input message="tns:CheckSsoLoginSoapIn" />
+      <wsdl:output message="tns:CheckSsoLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginIn">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登入事件</wsdl:documentation>
+      <wsdl:input message="tns:SsoLoginInSoapIn" />
+      <wsdl:output message="tns:SsoLoginInSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginOut">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登出事件</wsdl:documentation>
+      <wsdl:input message="tns:SsoLoginOutSoapIn" />
+      <wsdl:output message="tns:SsoLoginOutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SynchroUserInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">同步用户信息</wsdl:documentation>
+      <wsdl:input message="tns:SynchroUserInfoSoapIn" />
+      <wsdl:output message="tns:SynchroUserInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="UserServiceHttpGet">
+    <wsdl:operation name="GetOpenIMCredential">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取IM登录凭证</wsdl:documentation>
+      <wsdl:input message="tns:GetOpenIMCredentialHttpGetIn" />
+      <wsdl:output message="tns:GetOpenIMCredentialHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIMUserInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取百川用户信息</wsdl:documentation>
+      <wsdl:input message="tns:GetIMUserInfoHttpGetIn" />
+      <wsdl:output message="tns:GetIMUserInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenAppID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取OpenID</wsdl:documentation>
+      <wsdl:input message="tns:GetOpenAppIDHttpGetIn" />
+      <wsdl:output message="tns:GetOpenAppIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicKey">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取RSA公钥</wsdl:documentation>
+      <wsdl:input name="GetRSAPublicKey" message="tns:GetRSAPublicKeyHttpGetIn" />
+      <wsdl:output name="GetRSAPublicKey" message="tns:GetRSAPublicKeyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取用户基本信息(管理专用)</wsdl:documentation>
+      <wsdl:input message="tns:GetUserInfoHttpGetIn" />
+      <wsdl:output message="tns:GetUserInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取用户信息</wsdl:documentation>
+      <wsdl:input message="tns:GetInformationHttpGetIn" />
+      <wsdl:output message="tns:GetInformationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取登录信息</wsdl:documentation>
+      <wsdl:input message="tns:GetLoginInfoHttpGetIn" />
+      <wsdl:output message="tns:GetLoginInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUserCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">用户名唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniqueUserCodeHttpGetIn" />
+      <wsdl:output message="tns:UniqueUserCodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniqueEmail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">邮箱唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniqueEmailHttpGetIn" />
+      <wsdl:output message="tns:UniqueEmailHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniqueMobile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">手机唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniqueMobileHttpGetIn" />
+      <wsdl:output message="tns:UniqueMobileHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniquePublicID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">微信OpenID唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniquePublicIDHttpGetIn" />
+      <wsdl:output message="tns:UniquePublicIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUnionID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">微信UnionID唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniqueUnionIDHttpGetIn" />
+      <wsdl:output message="tns:UniqueUnionIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">验证密码</wsdl:documentation>
+      <wsdl:input message="tns:CheckPasswordHttpGetIn" />
+      <wsdl:output message="tns:CheckPasswordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">将验证码发到手机</wsdl:documentation>
+      <wsdl:input message="tns:SendIdentifyToMobileHttpGetIn" />
+      <wsdl:output message="tns:SendIdentifyToMobileHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobileForBind">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">将验证码发到手机（手机绑定）</wsdl:documentation>
+      <wsdl:input message="tns:SendIdentifyToMobileForBindHttpGetIn" />
+      <wsdl:output message="tns:SendIdentifyToMobileForBindHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckIdentifyCodeForBind">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">验证手机验证码（手机绑定）</wsdl:documentation>
+      <wsdl:input message="tns:CheckIdentifyCodeForBindHttpGetIn" />
+      <wsdl:output message="tns:CheckIdentifyCodeForBindHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToEmail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">将验证码发到邮箱</wsdl:documentation>
+      <wsdl:input message="tns:SendIdentifyToEmailHttpGetIn" />
+      <wsdl:output message="tns:SendIdentifyToEmailHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IdentifyEmailCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">验证邮箱验证码</wsdl:documentation>
+      <wsdl:input message="tns:IdentifyEmailCodeHttpGetIn" />
+      <wsdl:output message="tns:IdentifyEmailCodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">修改密码</wsdl:documentation>
+      <wsdl:input message="tns:ModifyPasswordHttpGetIn" />
+      <wsdl:output message="tns:ModifyPasswordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressBookUserInfos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取通讯录列表(首页)</wsdl:documentation>
+      <wsdl:input message="tns:GetAddressBookUserInfosHttpGetIn" />
+      <wsdl:output message="tns:GetAddressBookUserInfosHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchAddressBookUserInfos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索通讯录列表(首页)</wsdl:documentation>
+      <wsdl:input message="tns:SearchAddressBookUserInfosHttpGetIn" />
+      <wsdl:output message="tns:SearchAddressBookUserInfosHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAddressBookList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取通讯录列表</wsdl:documentation>
+      <wsdl:input message="tns:GetAllAddressBookListHttpGetIn" />
+      <wsdl:output message="tns:GetAllAddressBookListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ManageGroupSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:ManageGroupSearchHttpGetIn" />
+      <wsdl:output message="tns:ManageGroupSearchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupAllNoInheritList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索所有不可被继承的用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetGroupAllNoInheritListHttpGetIn" />
+      <wsdl:output message="tns:GetGroupAllNoInheritListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleAllNoInheritList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索所有不可被继承的用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetRoleAllNoInheritListHttpGetIn" />
+      <wsdl:output message="tns:GetRoleAllNoInheritListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索角色组信息（角色组管理）</wsdl:documentation>
+      <wsdl:input message="tns:ManageRoleSearchHttpGetIn" />
+      <wsdl:output message="tns:ManageRoleSearchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleInheritGroupSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索角色组继承的用户组信息（角色组管理）</wsdl:documentation>
+      <wsdl:input message="tns:ManageRoleInheritGroupSearchHttpGetIn" />
+      <wsdl:output message="tns:ManageRoleInheritGroupSearchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllGroupMemberList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索用户组成员信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetAllGroupMemberListHttpGetIn" />
+      <wsdl:output message="tns:GetAllGroupMemberListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoleMemberList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索角色组成员信息（角色组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetAllRoleMemberListHttpGetIn" />
+      <wsdl:output message="tns:GetAllRoleMemberListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllInheritListByPID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索用户组成员信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetAllInheritListByPIDHttpGetIn" />
+      <wsdl:output message="tns:GetAllInheritListByPIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInheritGroups">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索用户组继承用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetInheritGroupsHttpGetIn" />
+      <wsdl:output message="tns:GetInheritGroupsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleInheritGroups">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索角色组继承用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetRoleInheritGroupsHttpGetIn" />
+      <wsdl:output message="tns:GetRoleInheritGroupsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVerifyCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取验证码</wsdl:documentation>
+      <wsdl:input message="tns:GetVerifyCodeHttpGetIn" />
+      <wsdl:output message="tns:GetVerifyCodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUnionID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据UnionID获取用户信息</wsdl:documentation>
+      <wsdl:input message="tns:GetUserInfoByUnionIDHttpGetIn" />
+      <wsdl:output message="tns:GetUserInfoByUnionIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUnsubscribe">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">取消微信关注及绑定</wsdl:documentation>
+      <wsdl:input message="tns:SetUnsubscribeHttpGetIn" />
+      <wsdl:output message="tns:SetUnsubscribeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelAddressBookList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取中心中层以上干部联系方式</wsdl:documentation>
+      <wsdl:input message="tns:GetMiddleLevelAddressBookListHttpGetIn" />
+      <wsdl:output message="tns:GetMiddleLevelAddressBookListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelLeaderList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取中心中层干部</wsdl:documentation>
+      <wsdl:input message="tns:GetMiddleLevelLeaderListHttpGetIn" />
+      <wsdl:output message="tns:GetMiddleLevelLeaderListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTipUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取某人的提醒人员</wsdl:documentation>
+      <wsdl:input message="tns:GetAllTipUserHttpGetIn" />
+      <wsdl:output message="tns:GetAllTipUserHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSsoLogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">检测登陆状态，如果已登录则不需要再登录</wsdl:documentation>
+      <wsdl:input message="tns:CheckSsoLoginHttpGetIn" />
+      <wsdl:output message="tns:CheckSsoLoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginIn">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登入事件</wsdl:documentation>
+      <wsdl:input message="tns:SsoLoginInHttpGetIn" />
+      <wsdl:output message="tns:SsoLoginInHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginOut">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登出事件</wsdl:documentation>
+      <wsdl:input message="tns:SsoLoginOutHttpGetIn" />
+      <wsdl:output message="tns:SsoLoginOutHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="UserServiceHttpPost">
+    <wsdl:operation name="GetOpenIMCredential">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取IM登录凭证</wsdl:documentation>
+      <wsdl:input message="tns:GetOpenIMCredentialHttpPostIn" />
+      <wsdl:output message="tns:GetOpenIMCredentialHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIMUserInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取百川用户信息</wsdl:documentation>
+      <wsdl:input message="tns:GetIMUserInfoHttpPostIn" />
+      <wsdl:output message="tns:GetIMUserInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenAppID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取OpenID</wsdl:documentation>
+      <wsdl:input message="tns:GetOpenAppIDHttpPostIn" />
+      <wsdl:output message="tns:GetOpenAppIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicKey">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取RSA公钥</wsdl:documentation>
+      <wsdl:input name="GetRSAPublicKey" message="tns:GetRSAPublicKeyHttpPostIn" />
+      <wsdl:output name="GetRSAPublicKey" message="tns:GetRSAPublicKeyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取用户基本信息(管理专用)</wsdl:documentation>
+      <wsdl:input message="tns:GetUserInfoHttpPostIn" />
+      <wsdl:output message="tns:GetUserInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取用户信息</wsdl:documentation>
+      <wsdl:input message="tns:GetInformationHttpPostIn" />
+      <wsdl:output message="tns:GetInformationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取登录信息</wsdl:documentation>
+      <wsdl:input message="tns:GetLoginInfoHttpPostIn" />
+      <wsdl:output message="tns:GetLoginInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUserCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">用户名唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniqueUserCodeHttpPostIn" />
+      <wsdl:output message="tns:UniqueUserCodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniqueEmail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">邮箱唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniqueEmailHttpPostIn" />
+      <wsdl:output message="tns:UniqueEmailHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniqueMobile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">手机唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniqueMobileHttpPostIn" />
+      <wsdl:output message="tns:UniqueMobileHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniquePublicID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">微信OpenID唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniquePublicIDHttpPostIn" />
+      <wsdl:output message="tns:UniquePublicIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUnionID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">微信UnionID唯一性检测</wsdl:documentation>
+      <wsdl:input message="tns:UniqueUnionIDHttpPostIn" />
+      <wsdl:output message="tns:UniqueUnionIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">验证密码</wsdl:documentation>
+      <wsdl:input message="tns:CheckPasswordHttpPostIn" />
+      <wsdl:output message="tns:CheckPasswordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">将验证码发到手机</wsdl:documentation>
+      <wsdl:input message="tns:SendIdentifyToMobileHttpPostIn" />
+      <wsdl:output message="tns:SendIdentifyToMobileHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobileForBind">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">将验证码发到手机（手机绑定）</wsdl:documentation>
+      <wsdl:input message="tns:SendIdentifyToMobileForBindHttpPostIn" />
+      <wsdl:output message="tns:SendIdentifyToMobileForBindHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckIdentifyCodeForBind">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">验证手机验证码（手机绑定）</wsdl:documentation>
+      <wsdl:input message="tns:CheckIdentifyCodeForBindHttpPostIn" />
+      <wsdl:output message="tns:CheckIdentifyCodeForBindHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToEmail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">将验证码发到邮箱</wsdl:documentation>
+      <wsdl:input message="tns:SendIdentifyToEmailHttpPostIn" />
+      <wsdl:output message="tns:SendIdentifyToEmailHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IdentifyEmailCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">验证邮箱验证码</wsdl:documentation>
+      <wsdl:input message="tns:IdentifyEmailCodeHttpPostIn" />
+      <wsdl:output message="tns:IdentifyEmailCodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">修改密码</wsdl:documentation>
+      <wsdl:input message="tns:ModifyPasswordHttpPostIn" />
+      <wsdl:output message="tns:ModifyPasswordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressBookUserInfos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取通讯录列表(首页)</wsdl:documentation>
+      <wsdl:input message="tns:GetAddressBookUserInfosHttpPostIn" />
+      <wsdl:output message="tns:GetAddressBookUserInfosHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchAddressBookUserInfos">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索通讯录列表(首页)</wsdl:documentation>
+      <wsdl:input message="tns:SearchAddressBookUserInfosHttpPostIn" />
+      <wsdl:output message="tns:SearchAddressBookUserInfosHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAddressBookList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取通讯录列表</wsdl:documentation>
+      <wsdl:input message="tns:GetAllAddressBookListHttpPostIn" />
+      <wsdl:output message="tns:GetAllAddressBookListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ManageGroupSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:ManageGroupSearchHttpPostIn" />
+      <wsdl:output message="tns:ManageGroupSearchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupAllNoInheritList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索所有不可被继承的用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetGroupAllNoInheritListHttpPostIn" />
+      <wsdl:output message="tns:GetGroupAllNoInheritListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleAllNoInheritList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索所有不可被继承的用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetRoleAllNoInheritListHttpPostIn" />
+      <wsdl:output message="tns:GetRoleAllNoInheritListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索角色组信息（角色组管理）</wsdl:documentation>
+      <wsdl:input message="tns:ManageRoleSearchHttpPostIn" />
+      <wsdl:output message="tns:ManageRoleSearchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleInheritGroupSearch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索角色组继承的用户组信息（角色组管理）</wsdl:documentation>
+      <wsdl:input message="tns:ManageRoleInheritGroupSearchHttpPostIn" />
+      <wsdl:output message="tns:ManageRoleInheritGroupSearchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllGroupMemberList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索用户组成员信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetAllGroupMemberListHttpPostIn" />
+      <wsdl:output message="tns:GetAllGroupMemberListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoleMemberList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索角色组成员信息（角色组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetAllRoleMemberListHttpPostIn" />
+      <wsdl:output message="tns:GetAllRoleMemberListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllInheritListByPID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索用户组成员信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetAllInheritListByPIDHttpPostIn" />
+      <wsdl:output message="tns:GetAllInheritListByPIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInheritGroups">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索用户组继承用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetInheritGroupsHttpPostIn" />
+      <wsdl:output message="tns:GetInheritGroupsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleInheritGroups">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">搜索角色组继承用户组信息（用户组管理）</wsdl:documentation>
+      <wsdl:input message="tns:GetRoleInheritGroupsHttpPostIn" />
+      <wsdl:output message="tns:GetRoleInheritGroupsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVerifyCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取验证码</wsdl:documentation>
+      <wsdl:input message="tns:GetVerifyCodeHttpPostIn" />
+      <wsdl:output message="tns:GetVerifyCodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUnionID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据UnionID获取用户信息</wsdl:documentation>
+      <wsdl:input message="tns:GetUserInfoByUnionIDHttpPostIn" />
+      <wsdl:output message="tns:GetUserInfoByUnionIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUnsubscribe">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">取消微信关注及绑定</wsdl:documentation>
+      <wsdl:input message="tns:SetUnsubscribeHttpPostIn" />
+      <wsdl:output message="tns:SetUnsubscribeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelAddressBookList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取中心中层以上干部联系方式</wsdl:documentation>
+      <wsdl:input message="tns:GetMiddleLevelAddressBookListHttpPostIn" />
+      <wsdl:output message="tns:GetMiddleLevelAddressBookListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelLeaderList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取中心中层干部</wsdl:documentation>
+      <wsdl:input message="tns:GetMiddleLevelLeaderListHttpPostIn" />
+      <wsdl:output message="tns:GetMiddleLevelLeaderListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTipUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取某人的提醒人员</wsdl:documentation>
+      <wsdl:input message="tns:GetAllTipUserHttpPostIn" />
+      <wsdl:output message="tns:GetAllTipUserHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSsoLogin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">检测登陆状态，如果已登录则不需要再登录</wsdl:documentation>
+      <wsdl:input message="tns:CheckSsoLoginHttpPostIn" />
+      <wsdl:output message="tns:CheckSsoLoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginIn">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登入事件</wsdl:documentation>
+      <wsdl:input message="tns:SsoLoginInHttpPostIn" />
+      <wsdl:output message="tns:SsoLoginInHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginOut">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">登出事件</wsdl:documentation>
+      <wsdl:input message="tns:SsoLoginOutHttpPostIn" />
+      <wsdl:output message="tns:SsoLoginOutHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserServiceSoap" type="tns:UserServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOpenIMCredential">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetOpenIMCredential" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIMUserInfo">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetIMUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIMUserList">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetIMUserList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeaderSubmit">
+      <soap:operation soapAction="http://oa.miic.com.cn/LeaderSubmit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenAppID">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetOpenAppID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicKey">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetRSAPublicKey" style="document" />
+      <wsdl:input name="GetRSAPublicKey">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetRSAPublicKey">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <soap:operation soapAction="http://oa.miic.com.cn/ResetEmailPassword" style="document" />
+      <wsdl:input name="ResetEmailPassword">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ResetEmailPassword">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <soap:operation soapAction="http://oa.miic.com.cn/ResetMobilePassword" style="document" />
+      <wsdl:input name="ResetMobilePassword">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ResetMobilePassword">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://oa.miic.com.cn/WebLogin" style="document" />
+      <wsdl:input name="WebLogin">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="WebLogin">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DirectLogin">
+      <soap:operation soapAction="http://oa.miic.com.cn/WebDirectLogin" style="document" />
+      <wsdl:input name="WebDirectLogin">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="WebDirectLogin">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://oa.miic.com.cn/WeixinLogin" style="document" />
+      <wsdl:input name="WeixinLogin">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="WeixinLogin">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://oa.miic.com.cn/AppLogin" style="document" />
+      <wsdl:input name="AppLogin">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AppLogin">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPosition">
+      <soap:operation soapAction="http://oa.miic.com.cn/SetPosition" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <soap:operation soapAction="http://oa.miic.com.cn/Submit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInformation">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginInfo">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetLoginInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUserCode">
+      <soap:operation soapAction="http://oa.miic.com.cn/UniqueUserCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueEmail">
+      <soap:operation soapAction="http://oa.miic.com.cn/UniqueEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueMobile">
+      <soap:operation soapAction="http://oa.miic.com.cn/UniqueMobile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniquePublicID">
+      <soap:operation soapAction="http://oa.miic.com.cn/UniquePublicID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUnionID">
+      <soap:operation soapAction="http://oa.miic.com.cn/UniqueUnionID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPassword">
+      <soap:operation soapAction="http://oa.miic.com.cn/CheckPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobile">
+      <soap:operation soapAction="http://oa.miic.com.cn/SendIdentifyToMobile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobileForBind">
+      <soap:operation soapAction="http://oa.miic.com.cn/SendIdentifyToMobileForBind" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckIdentifyCodeForBind">
+      <soap:operation soapAction="http://oa.miic.com.cn/CheckIdentifyCodeForBind" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToEmail">
+      <soap:operation soapAction="http://oa.miic.com.cn/SendIdentifyToEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IdentifyEmailCode">
+      <soap:operation soapAction="http://oa.miic.com.cn/IdentifyEmailCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordToEmail">
+      <soap:operation soapAction="http://oa.miic.com.cn/SendPasswordToEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPassword">
+      <soap:operation soapAction="http://oa.miic.com.cn/ModifyPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressBookUserInfos">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetAddressBookUserInfos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAddressBookUserInfos">
+      <soap:operation soapAction="http://oa.miic.com.cn/SearchAddressBookUserInfos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAddressBookList">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetAllAddressBookList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageSearch">
+      <soap:operation soapAction="http://oa.miic.com.cn/ManageSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManageSearchCount">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetManageSearchCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserInfo">
+      <soap:operation soapAction="http://oa.miic.com.cn/DeleteUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageGroupSearch">
+      <soap:operation soapAction="http://oa.miic.com.cn/ManageGroupSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupAllNoInheritList">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetGroupAllNoInheritList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleAllNoInheritList">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetRoleAllNoInheritList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleSearch">
+      <soap:operation soapAction="http://oa.miic.com.cn/ManageRoleSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleInheritGroupSearch">
+      <soap:operation soapAction="http://oa.miic.com.cn/ManageRoleInheritGroupSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllGroupMemberList">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetAllGroupMemberList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoleMemberList">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetAllRoleMemberList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllInheritListByPID">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetAllInheritListByPID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInheritGroups">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetInheritGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleInheritGroups">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetRoleInheritGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVerifyCode">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetVerifyCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUnionID">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetUserInfoByUnionID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUnsubscribe">
+      <soap:operation soapAction="http://oa.miic.com.cn/SetUnsubscribe" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelAddressBookList">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetMiddleLevelAddressBookList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelLeaderList">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetMiddleLevelLeaderList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTipUser">
+      <soap:operation soapAction="http://oa.miic.com.cn/GetAllTipUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSsoLogin">
+      <soap:operation soapAction="http://oa.miic.com.cn/CheckSsoLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginIn">
+      <soap:operation soapAction="http://oa.miic.com.cn/SsoLoginIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginOut">
+      <soap:operation soapAction="http://oa.miic.com.cn/SsoLoginOut" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SynchroUserInfo">
+      <soap:operation soapAction="http://oa.miic.com.cn/SynchroUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UserServiceSoap12" type="tns:UserServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOpenIMCredential">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetOpenIMCredential" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIMUserInfo">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetIMUserInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIMUserList">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetIMUserList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeaderSubmit">
+      <soap12:operation soapAction="http://oa.miic.com.cn/LeaderSubmit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenAppID">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetOpenAppID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicKey">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetRSAPublicKey" style="document" />
+      <wsdl:input name="GetRSAPublicKey">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetRSAPublicKey">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <soap12:operation soapAction="http://oa.miic.com.cn/ResetEmailPassword" style="document" />
+      <wsdl:input name="ResetEmailPassword">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ResetEmailPassword">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <soap12:operation soapAction="http://oa.miic.com.cn/ResetMobilePassword" style="document" />
+      <wsdl:input name="ResetMobilePassword">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ResetMobilePassword">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://oa.miic.com.cn/WebLogin" style="document" />
+      <wsdl:input name="WebLogin">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="WebLogin">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DirectLogin">
+      <soap12:operation soapAction="http://oa.miic.com.cn/WebDirectLogin" style="document" />
+      <wsdl:input name="WebDirectLogin">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="WebDirectLogin">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://oa.miic.com.cn/WeixinLogin" style="document" />
+      <wsdl:input name="WeixinLogin">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="WeixinLogin">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://oa.miic.com.cn/AppLogin" style="document" />
+      <wsdl:input name="AppLogin">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AppLogin">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPosition">
+      <soap12:operation soapAction="http://oa.miic.com.cn/SetPosition" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <soap12:operation soapAction="http://oa.miic.com.cn/Submit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInformation">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetInformation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginInfo">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetLoginInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUserCode">
+      <soap12:operation soapAction="http://oa.miic.com.cn/UniqueUserCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueEmail">
+      <soap12:operation soapAction="http://oa.miic.com.cn/UniqueEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueMobile">
+      <soap12:operation soapAction="http://oa.miic.com.cn/UniqueMobile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniquePublicID">
+      <soap12:operation soapAction="http://oa.miic.com.cn/UniquePublicID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUnionID">
+      <soap12:operation soapAction="http://oa.miic.com.cn/UniqueUnionID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPassword">
+      <soap12:operation soapAction="http://oa.miic.com.cn/CheckPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobile">
+      <soap12:operation soapAction="http://oa.miic.com.cn/SendIdentifyToMobile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobileForBind">
+      <soap12:operation soapAction="http://oa.miic.com.cn/SendIdentifyToMobileForBind" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckIdentifyCodeForBind">
+      <soap12:operation soapAction="http://oa.miic.com.cn/CheckIdentifyCodeForBind" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToEmail">
+      <soap12:operation soapAction="http://oa.miic.com.cn/SendIdentifyToEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IdentifyEmailCode">
+      <soap12:operation soapAction="http://oa.miic.com.cn/IdentifyEmailCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordToEmail">
+      <soap12:operation soapAction="http://oa.miic.com.cn/SendPasswordToEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPassword">
+      <soap12:operation soapAction="http://oa.miic.com.cn/ModifyPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressBookUserInfos">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetAddressBookUserInfos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAddressBookUserInfos">
+      <soap12:operation soapAction="http://oa.miic.com.cn/SearchAddressBookUserInfos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAddressBookList">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetAllAddressBookList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageSearch">
+      <soap12:operation soapAction="http://oa.miic.com.cn/ManageSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManageSearchCount">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetManageSearchCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserInfo">
+      <soap12:operation soapAction="http://oa.miic.com.cn/DeleteUserInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageGroupSearch">
+      <soap12:operation soapAction="http://oa.miic.com.cn/ManageGroupSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupAllNoInheritList">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetGroupAllNoInheritList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleAllNoInheritList">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetRoleAllNoInheritList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleSearch">
+      <soap12:operation soapAction="http://oa.miic.com.cn/ManageRoleSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleInheritGroupSearch">
+      <soap12:operation soapAction="http://oa.miic.com.cn/ManageRoleInheritGroupSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllGroupMemberList">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetAllGroupMemberList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoleMemberList">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetAllRoleMemberList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllInheritListByPID">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetAllInheritListByPID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInheritGroups">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetInheritGroups" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleInheritGroups">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetRoleInheritGroups" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVerifyCode">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetVerifyCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUnionID">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetUserInfoByUnionID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUnsubscribe">
+      <soap12:operation soapAction="http://oa.miic.com.cn/SetUnsubscribe" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelAddressBookList">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetMiddleLevelAddressBookList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelLeaderList">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetMiddleLevelLeaderList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTipUser">
+      <soap12:operation soapAction="http://oa.miic.com.cn/GetAllTipUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSsoLogin">
+      <soap12:operation soapAction="http://oa.miic.com.cn/CheckSsoLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginIn">
+      <soap12:operation soapAction="http://oa.miic.com.cn/SsoLoginIn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginOut">
+      <soap12:operation soapAction="http://oa.miic.com.cn/SsoLoginOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SynchroUserInfo">
+      <soap12:operation soapAction="http://oa.miic.com.cn/SynchroUserInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UserServiceHttpGet" type="tns:UserServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetOpenIMCredential">
+      <http:operation location="/GetOpenIMCredential" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIMUserInfo">
+      <http:operation location="/GetIMUserInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenAppID">
+      <http:operation location="/GetOpenAppID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicKey">
+      <http:operation location="/GetRSAPublicKey" />
+      <wsdl:input name="GetRSAPublicKey">
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output name="GetRSAPublicKey">
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <http:operation location="/GetUserInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInformation">
+      <http:operation location="/GetInformation" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginInfo">
+      <http:operation location="/GetLoginInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUserCode">
+      <http:operation location="/UniqueUserCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueEmail">
+      <http:operation location="/UniqueEmail" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueMobile">
+      <http:operation location="/UniqueMobile" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniquePublicID">
+      <http:operation location="/UniquePublicID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUnionID">
+      <http:operation location="/UniqueUnionID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPassword">
+      <http:operation location="/CheckPassword" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobile">
+      <http:operation location="/SendIdentifyToMobile" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobileForBind">
+      <http:operation location="/SendIdentifyToMobileForBind" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckIdentifyCodeForBind">
+      <http:operation location="/CheckIdentifyCodeForBind" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToEmail">
+      <http:operation location="/SendIdentifyToEmail" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IdentifyEmailCode">
+      <http:operation location="/IdentifyEmailCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPassword">
+      <http:operation location="/ModifyPassword" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressBookUserInfos">
+      <http:operation location="/GetAddressBookUserInfos" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAddressBookUserInfos">
+      <http:operation location="/SearchAddressBookUserInfos" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAddressBookList">
+      <http:operation location="/GetAllAddressBookList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageGroupSearch">
+      <http:operation location="/ManageGroupSearch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupAllNoInheritList">
+      <http:operation location="/GetGroupAllNoInheritList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleAllNoInheritList">
+      <http:operation location="/GetRoleAllNoInheritList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleSearch">
+      <http:operation location="/ManageRoleSearch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleInheritGroupSearch">
+      <http:operation location="/ManageRoleInheritGroupSearch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllGroupMemberList">
+      <http:operation location="/GetAllGroupMemberList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoleMemberList">
+      <http:operation location="/GetAllRoleMemberList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllInheritListByPID">
+      <http:operation location="/GetAllInheritListByPID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInheritGroups">
+      <http:operation location="/GetInheritGroups" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleInheritGroups">
+      <http:operation location="/GetRoleInheritGroups" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVerifyCode">
+      <http:operation location="/GetVerifyCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUnionID">
+      <http:operation location="/GetUserInfoByUnionID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUnsubscribe">
+      <http:operation location="/SetUnsubscribe" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelAddressBookList">
+      <http:operation location="/GetMiddleLevelAddressBookList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelLeaderList">
+      <http:operation location="/GetMiddleLevelLeaderList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTipUser">
+      <http:operation location="/GetAllTipUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSsoLogin">
+      <http:operation location="/CheckSsoLogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginIn">
+      <http:operation location="/SsoLoginIn" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginOut">
+      <http:operation location="/SsoLoginOut" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UserServiceHttpPost" type="tns:UserServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetOpenIMCredential">
+      <http:operation location="/GetOpenIMCredential" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIMUserInfo">
+      <http:operation location="/GetIMUserInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenAppID">
+      <http:operation location="/GetOpenAppID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicKey">
+      <http:operation location="/GetRSAPublicKey" />
+      <wsdl:input name="GetRSAPublicKey">
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output name="GetRSAPublicKey">
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <http:operation location="/GetUserInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInformation">
+      <http:operation location="/GetInformation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginInfo">
+      <http:operation location="/GetLoginInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUserCode">
+      <http:operation location="/UniqueUserCode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueEmail">
+      <http:operation location="/UniqueEmail" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueMobile">
+      <http:operation location="/UniqueMobile" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniquePublicID">
+      <http:operation location="/UniquePublicID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueUnionID">
+      <http:operation location="/UniqueUnionID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPassword">
+      <http:operation location="/CheckPassword" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobile">
+      <http:operation location="/SendIdentifyToMobile" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToMobileForBind">
+      <http:operation location="/SendIdentifyToMobileForBind" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckIdentifyCodeForBind">
+      <http:operation location="/CheckIdentifyCodeForBind" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendIdentifyToEmail">
+      <http:operation location="/SendIdentifyToEmail" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IdentifyEmailCode">
+      <http:operation location="/IdentifyEmailCode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPassword">
+      <http:operation location="/ModifyPassword" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressBookUserInfos">
+      <http:operation location="/GetAddressBookUserInfos" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAddressBookUserInfos">
+      <http:operation location="/SearchAddressBookUserInfos" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAddressBookList">
+      <http:operation location="/GetAllAddressBookList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageGroupSearch">
+      <http:operation location="/ManageGroupSearch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupAllNoInheritList">
+      <http:operation location="/GetGroupAllNoInheritList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleAllNoInheritList">
+      <http:operation location="/GetRoleAllNoInheritList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleSearch">
+      <http:operation location="/ManageRoleSearch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ManageRoleInheritGroupSearch">
+      <http:operation location="/ManageRoleInheritGroupSearch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllGroupMemberList">
+      <http:operation location="/GetAllGroupMemberList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoleMemberList">
+      <http:operation location="/GetAllRoleMemberList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllInheritListByPID">
+      <http:operation location="/GetAllInheritListByPID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInheritGroups">
+      <http:operation location="/GetInheritGroups" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleInheritGroups">
+      <http:operation location="/GetRoleInheritGroups" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVerifyCode">
+      <http:operation location="/GetVerifyCode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByUnionID">
+      <http:operation location="/GetUserInfoByUnionID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUnsubscribe">
+      <http:operation location="/SetUnsubscribe" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelAddressBookList">
+      <http:operation location="/GetMiddleLevelAddressBookList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMiddleLevelLeaderList">
+      <http:operation location="/GetMiddleLevelLeaderList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTipUser">
+      <http:operation location="/GetAllTipUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSsoLogin">
+      <http:operation location="/CheckSsoLogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginIn">
+      <http:operation location="/SsoLoginIn" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SsoLoginOut">
+      <http:operation location="/SsoLoginOut" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserService">
+    <wsdl:port name="UserServiceSoap" binding="tns:UserServiceSoap">
+      <soap:address location="http://oa.miic.com.cn/service/UserService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UserServiceSoap12" binding="tns:UserServiceSoap12">
+      <soap12:address location="http://oa.miic.com.cn/service/UserService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UserServiceHttpGet" binding="tns:UserServiceHttpGet">
+      <http:address location="http://oa.miic.com.cn/service/UserService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UserServiceHttpPost" binding="tns:UserServiceHttpPost">
+      <http:address location="http://oa.miic.com.cn/service/UserService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

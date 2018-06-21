@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "http://share.miic.com.cn", "http://share.miic.com.cn", "{DF2F4075-018F-490F-898A-E1AB0652E5CA}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "false"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		Debug.AspNetCompiler.VirtualPath = "/share.miic.com.cn"
+		Debug.AspNetCompiler.PhysicalPath = "MIIC_FRIENDS_WEB\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\share.miic.com.cn\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/share.miic.com.cn"
+		Release.AspNetCompiler.PhysicalPath = "MIIC_FRIENDS_WEB\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\share.miic.com.cn\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "MIIC_FRIENDS_WEB\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIIC_USER_BASE", "MIIC_USER_BASE\MIIC_USER_BASE.csproj", "{2511E169-CA20-4BF2-A4E0-57DE43A3DA9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIIC_FRIENDS", "MIIC_FRIENDS\MIIC_FRIENDS.csproj", "{2D1B3E63-C0CB-4649-8682-2193EBF2713F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF2F4075-018F-490F-898A-E1AB0652E5CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF2F4075-018F-490F-898A-E1AB0652E5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF2F4075-018F-490F-898A-E1AB0652E5CA}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF2F4075-018F-490F-898A-E1AB0652E5CA}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{2511E169-CA20-4BF2-A4E0-57DE43A3DA9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2511E169-CA20-4BF2-A4E0-57DE43A3DA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2511E169-CA20-4BF2-A4E0-57DE43A3DA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2511E169-CA20-4BF2-A4E0-57DE43A3DA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D1B3E63-C0CB-4649-8682-2193EBF2713F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D1B3E63-C0CB-4649-8682-2193EBF2713F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D1B3E63-C0CB-4649-8682-2193EBF2713F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D1B3E63-C0CB-4649-8682-2193EBF2713F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F947B806-2F94-4617-BB7B-0BE05EC214ED}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2511E169-CA20-4BF2-A4E0-57DE43A3DA9C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MiicUser</RootNamespace>
+    <AssemblyName>MiicUser</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>True</CodeContractsRedundantAssumptions>
+    <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
+    <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsMissingPublicEnsuresAsWarnings>False</CodeContractsMissingPublicEnsuresAsWarnings>
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
+    <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
+    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>False</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestAssumptionsForCallees>False</CodeContractsSuggestAssumptionsForCallees>
+    <CodeContractsSuggestRequires>False</CodeContractsSuggestRequires>
+    <CodeContractsNecessaryEnsures>True</CodeContractsNecessaryEnsures>
+    <CodeContractsSuggestObjectInvariants>False</CodeContractsSuggestObjectInvariants>
+    <CodeContractsSuggestReadonly>True</CodeContractsSuggestReadonly>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly>MiicUser</CodeContractsCustomRewriterAssembly>
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsSQLServerOption />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MiicLibrary, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MIIC_LIBRARY\MiicLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAO\Manage\MiicSocialUserDao.cs" />
+    <Compile Include="DAO\Manage\Org\AreaInfoDao.cs" />
+    <Compile Include="DAO\Manage\Org\OrganizationInfoDao.cs" />
+    <Compile Include="DAO\Manage\Org\OrgCommentInfoDao.cs" />
+    <Compile Include="DAO\Manage\Org\RegisterTypeInfoDao.cs" />
+    <Compile Include="DAO\Manage\Org\ScaleInfoDao.cs" />
+    <Compile Include="DAO\Manage\Org\ShareTypeInfoDao.cs" />
+    <Compile Include="DAO\Manage\Org\TradeInfoDao.cs" />
+    <Compile Include="DAO\Manage\Org\TradeSubInfoDao.cs" />
+    <Compile Include="DAO\Manage\User\UserInfoDao.cs" />
+    <Compile Include="DTO\Manage\Org\AreaInfo.cs" />
+    <Compile Include="DTO\Manage\Org\DimOrganizationInfo.cs" />
+    <Compile Include="DTO\Manage\Org\DimRegisterType.cs" />
+    <Compile Include="DTO\Manage\Org\DimScaleInfo.cs" />
+    <Compile Include="DTO\Manage\Org\DimShareType.cs" />
+    <Compile Include="DTO\Manage\Org\DimTradeInfo.cs" />
+    <Compile Include="DTO\Manage\Org\DimTradeSubInfo.cs" />
+    <Compile Include="DTO\Manage\Org\OrganizationInfo.cs" />
+    <Compile Include="DTO\Manage\Org\OrgCommentInfo.cs" />
+    <Compile Include="DTO\Manage\Org\OrgProductInfo.cs" />
+    <Compile Include="DTO\Manage\Org\RegisterTypeInfo.cs" />
+    <Compile Include="DTO\Manage\Org\ScaleInfo.cs" />
+    <Compile Include="DTO\Manage\Org\ShareTypeInfo.cs" />
+    <Compile Include="DTO\Manage\Org\TradeInfo.cs" />
+    <Compile Include="DTO\Manage\Org\TradeSubInfo.cs" />
+    <Compile Include="DTO\Manage\User\MiicSocialUserInfo.cs" />
+    <Compile Include="DTO\Manage\User\SearchUserView\DownloadAllUserView.cs" />
+    <Compile Include="DTO\Manage\User\SearchUserView\GeneralSearchUserView.cs" />
+    <Compile Include="DTO\Manage\User\SearchUserView\SearchAllUserView.cs" />
+    <Compile Include="DTO\Manage\User\SearchUserView\SearchUserView.cs" />
+    <Compile Include="DTO\Manage\User\SimpleUser\GeneralSimpleUserView.cs" />
+    <Compile Include="DTO\Manage\User\SimpleUser\SimpleOrgUserView.cs" />
+    <Compile Include="DTO\Manage\User\SimpleUser\SimplePersonUserView.cs" />
+    <Compile Include="DTO\Manage\User\SimpleUser\SimpleUserView.cs" />
+    <Compile Include="DTO\Manage\User\UserInfo.cs" />
+    <Compile Include="DTO\Manage\User\UserLevelUpdateHistory.cs" />
+    <Compile Include="DTO\Manage\User\UserScopeHistory.cs" />
+    <Compile Include="DVO\Common\BoolWithMessageView.cs" />
+    <Compile Include="DVO\Common\BoolWithPrimaryKeyView.cs" />
+    <Compile Include="DVO\Common\ValidView.cs" />
+    <Compile Include="DVO\Common\YesNoView.cs" />
+    <Compile Include="DVO\Manage\Org\Comment\BroadcastCommentView.cs" />
+    <Compile Include="DVO\Manage\Org\Comment\CommentView.cs" />
+    <Compile Include="DVO\Manage\Org\Comment\ToCommentView.cs" />
+    <Compile Include="DVO\Manage\Org\SimpleOrganizationInfoView.cs" />
+    <Compile Include="DVO\Manage\Org\SimpleOrgProductView.cs" />
+    <Compile Include="DVO\Manage\User\DownloadSearchView.cs" />
+    <Compile Include="DVO\Manage\User\FindPasswordView.cs" />
+    <Compile Include="DVO\Manage\User\LoginRequestView.cs" />
+    <Compile Include="DVO\Manage\User\LoginResponseView.cs" />
+    <Compile Include="DVO\Manage\User\PasswordView.cs" />
+    <Compile Include="DVO\Manage\User\SetActivateView.cs" />
+    <Compile Include="DVO\Manage\User\SimpleUserInfoView.cs" />
+    <Compile Include="DVO\Manage\User\UserDisabledView.cs" />
+    <Compile Include="DVO\Manage\User\UserLevelView.cs" />
+    <Compile Include="DVO\Manage\User\UserSearchView.cs" />
+    <Compile Include="DVO\Manage\User\UserTypeView.cs" />
+    <Compile Include="IDAO\Manage\IMiicSocialUser.cs" />
+    <Compile Include="IDAO\Manage\Org\IAreaInfo.cs" />
+    <Compile Include="IDAO\Manage\Org\IOrganizationInfo.cs" />
+    <Compile Include="IDAO\Manage\Org\IOrgCommentInfo.cs" />
+    <Compile Include="IDAO\Manage\Org\IRegisterTypeInfo.cs" />
+    <Compile Include="IDAO\Manage\Org\IScaleInfo.cs" />
+    <Compile Include="IDAO\Manage\Org\IShareTypeInfo.cs" />
+    <Compile Include="IDAO\Manage\Org\ITradeInfo.cs" />
+    <Compile Include="IDAO\Manage\Org\ITradeSubInfo.cs" />
+    <Compile Include="IDAO\Manage\User\IUserInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Setting\Manage\User\GetWayTypeSetting.cs" />
+    <Compile Include="Setting\Manage\User\MiicGetBackTypeSetting.cs" />
+    <Compile Include="Setting\Manage\User\UserActivateSetting.cs" />
+    <Compile Include="Setting\Manage\User\UserLevelSetting.cs" />
+    <Compile Include="Setting\Manage\User\UserLoginTypeSetting.cs" />
+    <Compile Include="Setting\Manage\User\UserTypeSetting.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\BouncyCastle.Crypto.dll" />
+    <Content Include="bin\Debug\MiicLibrary.dll" />
+    <Content Include="bin\Debug\MiicLibrary.pdb" />
+    <Content Include="bin\Debug\MiicUser.dll" />
+    <Content Include="bin\Debug\MiicUser.pdb" />
+    <Content Include="bin\Debug\MySql.Data.dll" />
+    <Content Include="bin\Debug\TopSdk.dll" />
+    <Content Include="bin\Debug\TopSdk.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

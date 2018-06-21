@@ -1,0 +1,143 @@
+                               ID            talk ID
+                               Title         标题
+                               SubTitle      副标题
+                               Abstract      简介
+                               CreaterID     作者ID
+                               CreaterName    作者名称
+                               PublishTime    发表时间
+                               CreaterTime    创建时间
+                               PlanDeadLine   报名时间截止日期
+                               PublishDeadLine  发表时间截止日期
+                               CommunicateDeadline  交流时间截止日期
+                               CommunicateDuration  交流时长
+                               IsFree               是否免费         Enum.YesNo   
+                               OnlookerTotalNum     围观人总数
+                               OnlookerFloorNum     围观人最低达标人数
+                               OnlookerUsedNum      围观已参与人数
+                               OnlookerUnitPrice    围观价格
+                               FreeOnlook           是否免费围观 Enum.YesNo
+                               Termination          终止状态  Enum.YesNo
+                               Status               talk状态 Enum.PlanStatus
+                               FreePublicity        是否免费公开阅读 Enum.YesNo
+                               ReadPrice            付费阅读价格
+                               CoverUrl             封面
+                               SmallCoverUrl        压缩后封面
+                               FinishedQA           是否结束问答
+                               QAEditer             问答统计人
+                               Score                评分结果
+                               RaterID              评分人ID
+                               RaterName            评分人名称
+                               Recommend            是否建议推荐 Enum.YesNo
+                               RecommendStatus      推荐状态 Enum.RecommendStatus
+                               RecommendNum         助推数
+                               RecommendTime        助推时间
+                               EndTime              终止时间
+                               FinishedTime         正常结束时间
+                               BrowseNum            浏览总数
+                               CollectNum           被收藏总数
+                               CommentNum           评论总数
+                               PraiseNum            点赞总数
+                               TreadNum             点踩总数
+                               TransmitNum          转发数目
+                               ShareNum             分享数目
+                               IsRefused            是否拒绝审批 Enum.YesNo
+                               RefusedReason        拒绝原因
+                               Content              talk内容  //特别的：作者可以看全部、围观者可以看全部内容、免费阅读的文章可以看全部、付费阅读的人可以看全部
+                               HasAcc               是否包含附件
+                               EditStatus           编辑状态 Enum.YesNo
+                               ArticleFinishedTime  文章完成时间
+                               IsCreater            浏览人是否是作者   true/false
+                               IsPraiser            浏览人是否是点赞者   true/false
+                               IsCollecter          浏览人是否是收藏者   true/false
+                               IsOnlooker           浏览人是否是围观者   true/false
+                               IsTreader            浏览人是否是点赞者   true/false
+                               IsGrader             浏览人是否是评分者   true/false
+                               IsReader             浏览人是否是付费阅读者   true/false
+
+
+枚举：  
+Status               
+Enum.PlanStatus.prototype = {
+    Plan: 0,
+    PlanApproving: 1,
+    PlanApproved: 2,
+    PlanFinished: 3,
+    Publish: 4,
+    PublishFinished: 5,
+    Communicate: 8,
+    CommunicateFinished: 9,
+    Finished: 88
+};
+
+
+Enum.PlanStatus.GetDescription = function get_description(status) {
+
+        switch (status) {
+            case Enum.PlanStatus.Plan:
+                result = "预定保存";
+                break;
+            case Enum.PlanStatus.PlanApproving:
+                result = "待审批";
+                break;
+            case Enum.PlanStatus.PlanApproved:
+                result = "报名中";
+                break;
+            case Enum.PlanStatus.PlanFinished:
+                result = "报名结束";
+                break;
+            case Enum.PlanStatus.Publish:
+                result = "撰稿中";
+                break;
+            case Enum.PlanStatus.PublishFinished:
+                result = "撰稿已发表";
+                break;
+            case Enum.PlanStatus.Communicate:
+                result = "交流中";
+                break;
+            case Enum.PlanStatus.CommunicateFinished:
+                result = "交流结束";
+                break;
+            case Enum.PlanStatus.Finished:
+                result = "活动结束";
+                break;
+            default:
+                break;
+        }
+};
+
+Enum.YesNo.prototype = {
+    Unknow: 0,
+    Yes: 1,
+    No: 2
+};
+
+Enum.Valid.prototype = {
+    //无效
+    InValid: 1,
+    //有效
+    Valid: 2
+};
+
+Enum.AccType.prototype = {
+    Photo: 0,
+    File: 1
+};
+
+Enum.FileType.prototype = {
+    Word: 1,
+    Excel: 2,
+    PowerPoint: 3,
+    Pdf: 4,
+    Text: 5,
+    Accessory: 6
+
+};
+
+Enum.RecommendStatus.prototype = {
+    //同意推荐
+    Agree: 0,
+    //拒绝推荐
+    Refuse: 1,
+    //待审批
+    Waiting: 2
+};
